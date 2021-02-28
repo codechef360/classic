@@ -1,0 +1,115 @@
+@extends('layouts.admin-layout')
+@section('title')
+    Manage Adverts
+@endsection
+
+@section('page-name')
+    Manage Adverts
+@endsection
+
+@section('extra-styles')
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/forms/theme-checkbox-radio.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/dt-global_style.css">
+@endsection
+@section('main-content')
+    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+        <div class="widget-content widget-content-area br-6">
+            <h3>Manage Adverts</h3>
+            <div class="table-responsive mb-4 mt-4">
+                @if (session()->has('success'))
+                    <div class="alert-success alert" role="alert">{!! session()->get('success') !!}</div>
+                @endif
+                <table id="multi-column-ordering" class="table table-hover" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Customer Name</th>
+                        <th>Package</th>
+                        <th>Category</th>
+                        <th>Subcategory</th>
+                        <th>Start Date</th>
+                        <th>Status</th>
+                        <th>End Date</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    @php
+                        $serial = 1;
+                    @endphp
+                    <tbody>
+                        @foreach($adverts as $advert)
+                            <tr>
+                                <td>{{$serial++}}</td>
+                                <td>{{$advert->title ?? ''}}</td>
+                                <td>{{$advert->getCustomer->first_name ?? ''}} {{$advert->getCustomer->surname ?? ''}}</td>
+                                <td>{{$advert->getPackage->package_name ?? ''}}</td>
+                                <td>{{$advert->getCategory->category_name ?? ''}}</td>
+                                <td>{{$advert->getSubCategory->sub_category_name ?? ''}}</td>
+                                <td>{{!is_null($advert->start_date) ? date('d/m/Y', strtotime($advert->start_date)) : '-'}}</td>
+                                <td>
+                                    @if($advert->status == 0)
+                                        <label for="" class="label label-secondary">Pending</label>
+                                    @elseif($advert->status == 1)
+                                    <label for="" class="label label-success">In-progress</label>
+                                    @elseif($advert->status == 2)
+                                    <label for="" class="label label-warning">Expired</label>
+                                    @elseif($advert->status == 3)
+                                        <label for="" class="label label-danger">Declined</label>
+                                    @endif
+                                </td>
+                                <td>{{!is_null($advert->end_date) ? date('d/m/Y', strtotime($advert->end_date)) : '-'}}</td>
+                                <td>
+                                    <a href="{{route('view-advert', $advert->slug)}}" class="badge badge-classic badge-primary text-uppercase">View</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Customer Name</th>
+                        <th>Package</th>
+                        <th>Category</th>
+                        <th>Subcategory</th>
+                        <th>Start Date</th>
+                        <th>Status</th>
+                        <th>End Date</th>
+                        <th>Action</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('extra-scripts')
+    <script src="/plugins/table/datatable/datatables.js"></script>
+    <script>
+        $('#multi-column-ordering').DataTable({
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+                "sLengthMenu": "Results :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [7, 10, 20, 50],
+            "pageLength": 7,
+            columnDefs: [ {
+                targets: [ 0 ],
+                orderData: [ 0, 1 ]
+            }, {
+                targets: [ 1 ],
+                orderData: [ 1, 0 ]
+            }, {
+                targets: [ 4 ],
+                orderData: [ 4, 0 ]
+            } ]
+        });
+    </script>
+@endsection
