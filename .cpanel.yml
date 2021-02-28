@@ -2,5 +2,5 @@
 deployment:
   tasks:
     # - export DEPLOYPATH=/home/tevicng/public_html/
-    - export DEPLOYPATH=/home/tevicng/public_html/classified/
+    - export DEPLOYPATH=/home/obaakbih/public_html/classified/
     - /bin/cp -R * $DEPLOYPATH
