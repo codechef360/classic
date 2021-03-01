@@ -141,8 +141,7 @@ class AdsController extends Controller
    }
 
    public function advertDetail($slug){
-       $advert = Ad::where('slug', $slug)->where('status',1)->orWhere('status',0)->first();
-
+       $advert = Ad::where('slug', $slug)/* ->where('status',1)->orWhere('status',0) */->first();
        $categories = Category::orderBy('category_name', 'ASC')->get();
         if(!empty($advert)){
             $related = Ad::where('category_id', $advert->category_id)

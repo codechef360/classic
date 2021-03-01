@@ -164,7 +164,7 @@
                 </div>
             </div>
             @if(Auth::check())
-            <input type="hidden" name="customer" id="customer" value="{{Auth::user()->id}}">
+                <input type="hidden" name="customer" id="customer" value="{{Auth::user()->id}}">
             @endif
         </section>
     </div>

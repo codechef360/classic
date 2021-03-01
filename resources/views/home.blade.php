@@ -18,9 +18,9 @@
                 <div class="banner-content">
                     <h1>You can #Buy, #Rent, #Booking anything from here.</h1>
                     <p>Buy and sell everything from used cars to mobile phones and computers, or search for property, jobs and more in the world.</p>
-                    <a href="#allAds" class="btn btn-outline">
+                    <a href="{{route('post-your-ad')}}" class="btn btn-outline">
                         <i class="fas fa-eye"></i>
-                        <span>Show all ads</span>
+                        <span>Post Your Ad</span>
                     </a>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     @foreach ($categories as $sliderCat)
                         <div class="suggest-card">
                             <div class="suggest-img">
-                                <img src="/images/suggest/automobile.png" alt="car">
+                                <img src="/attachments/category/featured-images/{{$sliderCat->featured_image}}" alt="{{$sliderCat->category_name ?? ''}}">
                             </div>
                             <div class="suggest-meta">
                                 <h6>
@@ -54,9 +54,6 @@
                                         <h6>Filter by Categories</h6>
                                     </div>
                                     <div class="product-sidebar-content">
-                                        <div class="product-sidebar-search">
-                                            <input type="text" placeholder="Search">
-                                        </div>
                                         <ul class="nasted-dropdown">
                                             @foreach ($categories as $category)
                                                 <li>
@@ -117,7 +114,7 @@
                                             </div>
                                             <div class="product-title">
                                                 <h5>
-                                                    <a href="{{route('advert-detail', $item->slug)}}">{{strlen($item->title) > 17 ? substr($item->title,0,17).'...' : $item->title  }}</a>
+                                                    <a href="{{route('view-advert', $item->slug)}}">{{strlen($item->title) > 17 ? substr($item->title,0,17).'...' : $item->title  }}</a>
                                                 </h5>
                                                 <ul class="product-location">
                                                     <li>
@@ -158,31 +155,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">
-                                            <i class="fas fa-long-arrow-alt-left"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link active" href="#">1</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
-                                    </li>
-                                    <li class="page-item">...</li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">67</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">
-                                            <i class="fas fa-long-arrow-alt-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
+                                {{$adverts->links('vendor.pagination.default')}}
                             </div>
                         </div>
                     </div>

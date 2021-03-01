@@ -15,7 +15,7 @@ All Categories
 @section('main-content')
 <div class="col-xl-3 col-lg-3 col-sm-3  layout-spacing">
     <div class="widget-content widget-content-area br-6">
-        <form class="needs-validation" novalidate action="{{route('categories')}}" method="post" autocomplete="off">
+        <form class="needs-validation" enctype="multipart/form-data" novalidate action="{{route('categories')}}" method="post" autocomplete="off">
             @csrf
             <div class="form-row">
                 <div class="col-md-12 mb-4">
@@ -23,6 +23,16 @@ All Categories
                     <input type="text" class="form-control" value="{{old('category_name')}}" name="category_name"  placeholder="Category Name" required>
                     <div class="invalid-feedback">
                         Please a unique category name
+                    </div>
+                    @error('category_name')
+                        <i class="text-danger mt-2">{{$message}}</i>
+                    @enderror
+                </div>
+                <div class="col-md-12 mb-4">
+                    <label for="validationCustom03">Featured Image</label>
+                    <input type="file" class="form-control-file"  name="featured_image"   required>
+                    <div class="invalid-feedback">
+                        Please upload featured image for this category.
                     </div>
                     @error('category_name')
                         <i class="text-danger mt-2">{{$message}}</i>

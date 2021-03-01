@@ -30,7 +30,6 @@ class CustomerController extends Controller
         return view('customer.my-adverts',['my_ads'=>$myAds]);
     }
     public function myAdvertDetail($slug){
-
         $myAd = Ad::where('customer_id', Auth::user()->id)->where('slug',$slug)->first();
         if(!empty($myAd)){
              $total_reviews = AdsReview::where('advertised_by', $myAd->customer_id)->get();
@@ -120,4 +119,7 @@ class CustomerController extends Controller
     public function notifications(){
         return view('customer.notifications');
     }
+
+
+
 }

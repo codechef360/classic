@@ -1,384 +1,587 @@
 @extends('layouts.master-layout')
 
 @section('title')
-    My Advert Detail
+    My Advert > {{$my_ad->title ?? ''}}
 @endsection
 
-@section('current-page')
-    <a href="javascript:void(0);">{{$detail->getCategory->category_name ?? ''}}</a> / {{$detail->title ?? ''}}
+@section('meta-title')
+    My Advert > {{$my_ad->title ?? ''}}
 @endsection
 
+@section('meta-keywords')
+    My Advert > {{$my_ad->title ?? ''}}
+@endsection
 @section('extra-styles')
-    <link rel="stylesheet" href="/assets/css/owl.carousel.css">
-    <link rel="stylesheet" href="/assets/css/owl.transitions.css">
-    <link rel="stylesheet" href="/assets/css/rateit.css">
-    <link rel="stylesheet" href="/assets/css/bootstrap-select.min.css">
-    <link href="/assets/css/lightbox.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/custom/rightbar-details.css">
 @endsection
-
 @section('main-content')
-    <div class="row single-product">
-        <div class="detail-block">
-            <div class="row  wow fadeInUp">
-
-                <div class="col-xs-12 col-sm-5 col-md-4 gallery-holder">
-                    <div class="product-item-holder size-big single-product-gallery small-gallery">
-
-                        <div id="owl-single-product">
-                            <div class="single-product-gallery-item" id="slide1">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p1.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p4.jpg" />
-                                </a>
+        <section class="ad-details-part">
+            <div class="container">
+                <div class="row">
+                    @if(session()->has('message-success'))
+                    <div class="col-md-12 mt-4">
+                        <div class="alert alert-success">
+                            {!! session()->get('message-success') !!}
+                        </div>
+                    </div>
+                    @endif
+                    <div class="col-lg-8">
+                        <div class="ad-details-card">
+                            <div class="ad-details-breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li>
+                                        <span class="flat-badge sale">@if($my_ad->ad_type == 0) Sales @else Promo @endif</span>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a href="javascript:void(0);">{{$my_ad->getCategory->category_name ?? ''}}</a>
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{$my_ad->getSubCategory->sub_category_name ?? ''}}</li>
+                                </ol>
                             </div>
-
-                            <div class="single-product-gallery-item" id="slide2">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p2.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p2.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide3">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p3.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p3.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide4">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p4.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p1.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide5">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p5.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p5.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide6">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p6.jpg">
-                                    <img class="img-responsive" alt="" src="assets/images/blank.gif" data-echo="assets/images/products/p6.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide7">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p7.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p7.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide8">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p8.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p8.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide9">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p9.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p9.jpg" />
-                                </a>
+                            <div class="ad-details-heading">
+                                <h2>
+                                    <a href="{{url()->current()}}">{{$my_ad->title ?? ''}}</a>
+                                </h2>
+                            </div>
+                            <ul class="ad-details-meta">
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-eye"></i>
+                                        <p>Views
+                                            <span>({{number_format(count($my_ad->getViews))}})</span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-star"></i>
+                                        <p>review
+                                            <span>({{number_format(count($my_ad->getAdvertReviews))}})</span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-heart"></i>
+                                        <p>Watchlist
+                                            <span>({{number_format(count($my_ad->getWatchlist))}})</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="ad-details-slider slider-arrow">
+                                @foreach ($my_ad->getGalleryImages as $item)
+                                    <div>
+                                        <img src="/attachments/product-gallery/{{$item->directory ?? ''}}" alt="{{$my_ad->title}}">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="ad-thumb-slider">
+                                @foreach ($my_ad->getGalleryImages as $image)
+                                    <div>
+                                        <img src="/attachments/product-gallery/{{$image->directory ?? ''}}" alt="{{$my_ad->title ?? ''}}">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="ad-details-action">
+                                <ul>
+                                    <li>
+                                        <button type="button">
+                                            <i class="fas fa-heart"></i>
+                                            <span>Watchlist</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            <span>report</span>
+                                        </button>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="single-product-gallery-thumbs gallery-thumbs">
-
-                            <div id="owl-single-product-thumbnails">
-                                <div class="item">
-                                    <a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="1" href="#slide1">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p4.jpg" />
-                                    </a>
-                                </div>
-
-                                <div class="item">
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="2" href="#slide2">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p2.jpg"/>
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="3" href="#slide3">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p3.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="4" href="#slide4">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p1.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="5" href="#slide5">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p5.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="6" href="#slide6">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p6.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="7" href="#slide7">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p7.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="8" href="#slide8">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p8.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="9" href="#slide9">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/p9.jpg" />
-                                    </a>
-                                </div>
-                            </div><!-- /#owl-single-product-thumbnails -->
-
-
-
-                        </div><!-- /.gallery-thumbs -->
-
-                    </div><!-- /.single-product-gallery -->
-                </div><!-- /.gallery-holder -->
-                <div class='col-sm-7 col-md-5 product-info-block'>
-                    <div class="product-info">
-                        <h1 class="name">{{$detail->title ?? ''}}</h1>
-
-                        <div class="rating-reviews m-t-20">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="pull-left">
-                                        <div class="rating rateit-small"></div>
-                                    </div>
-                                    <div class="pull-left">
-                                        <div class="reviews">
-                                            <a href="#" class="lnk">(13 Reviews)</a>
+                        <div class="ad-details-card">
+                            <div class="ad-details-title">
+                                <h5>Specification</h5>
+                            </div>
+                            <div class="ad-details-specific">
+                                <ul>
+                                    <li>
+                                        <h6>price:</h6>
+                                        <p>{{'₦'.number_format($my_ad->price,2)}}</p>
+                                    </li>
+                                    <li>
+                                        <h6>seller type:</h6>
+                                        <p>personal</p>
+                                    </li>
+                                    <li>
+                                        <h6>published:</h6>
+                                        <p>{{date('d F,Y', strtotime($my_ad->created_at))}}</p>
+                                    </li>
+                                    <li>
+                                        <h6>location:</h6>
+                                        <p>{{$my_ad->getLocation->location_name ?? ''}}</p>
+                                    </li>
+                                    <li>
+                                        <h6>category:</h6>
+                                        <p>{{$my_ad->getCategory->category_name ?? ''}}</p>
+                                    </li>
+                                    <li>
+                                        <h6>condition:</h6>
+                                        <p>@if($my_ad->product_condition == 0) Used @else New @endif</p>
+                                    </li>
+                                    <li>
+                                        <h6>price type:</h6>
+                                       <p>@if($my_ad->price_type == 0) Negotiable @else Fixed @endif</p>
+                                    </li>
+                                    <li>
+                                        <h6>ad type:</h6>
+                                        <p>@if($my_ad->ad_type == 0) Sales @else Promo @endif</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ad-details-card">
+                            <div class="ad-details-title">
+                                <h5>description</h5>
+                            </div>
+                            <div class="ad-details-descrip">
+                                {!! $my_ad->description ?? '' !!}
+                            </div>
+                        </div>
+                        <div class="ad-details-card">
+                            <div class="ad-details-title">
+                                <h5>reviews ({{number_format(count($my_ad->getAdvertReviews))}})</h5>
+                            </div>
+                            <div class="ad-details-review">
+                                <ul class="review-list">
+                                    @foreach ($my_ad->getAdvertReviews as $review)
+                                        <li class="review-item">
+                                            <div class="review">
+                                                <div class="review-head">
+                                                    <div class="review-author">
+                                                        <div class="review-avatar">
+                                                            <a href="#">
+                                                                <img src="/images/avatar/03.jpg" alt="review">
+                                                            </a>
+                                                        </div>
+                                                        <div class="review-meta">
+                                                            <h6>
+                                                                <a href="#">{{$review->getCustomer->first_name ?? ''}} {{$review->getCustomer->surname ?? ''}}</a>-
+                                                                <span>{{date('d F, Y h:ia', strtotime($review->created_at))}}</span>
+                                                            </h6>
+                                                            <ul>
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    <li>
+                                                                        <i class="fas fa-star {{$review->rating >= $i ? 'active' : ''}}"></i>
+                                                                    </li>
+                                                                @endfor
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="review-content">
+                                                    {{$review->content ?? ''}}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                               <div class="col-md-12 mt-4">
+                                    @if(session()->has('success'))
+                                        <div class="alert alert-success">
+                                            {!! session()->get('success') !!}
                                         </div>
-                                    </div>
-                                </div>
-                            </div><!-- /.row -->
-                        </div><!-- /.rating-reviews -->
-                        <div class="price-container info-container m-t-20">
-                            <div class="row">
-                                <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
-                                    <div class="price-box">
-                                        <span class="price">₦{{number_format($detail->price ?? 0,2)}}</span>
-                                        {{--<span class="price-strike">$900.00</span>--}}
-                                    </div>
+                                    @endif
                                 </div>
                                 @if(Auth::check())
-                                    <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
-                                        <div class="favorite-button">
-                                            <a class="btn btn-primary addToWishlist" data-toggle="tooltip" data-placement="right" title="Wishlist" href="javascript:void(0);" data-product="{{$detail->id}}">
-                                                <i class="fa fa-heart"></i>
-                                            </a>
+                                    <form class="ad-review-form" method="post" action="{{route('drop-review')}}">
+                                        @csrf
+
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Full name" value="{{Auth::user()->first_name}}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" placeholder="Email" value="{{Auth::user()->email}}" readonly>
+                                            </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="Describe" name="review" placeholder="Type review here..." style="resize: none;"></textarea>
+                                            @error('review')
+                                                <i class="text-danger mt-2">{{$message}}</i>
+                                            @enderror
                                         </div>
-                                    </div>
+                                        <div class="star-rating">
+                                            <input type="radio" name="rating" value="5" id="star-5">
+                                            <label for="star-5"></label>
+
+                                            <input type="radio" name="rating" value="4" id="star-4">
+                                            <label for="star-4"></label>
+
+                                            <input type="radio" name="rating" value="3" id="star-3">
+                                            <label for="star-3"></label>
+
+                                            <input type="radio" name="rating" value="2" id="star-2">
+                                            <label for="star-2"></label>
+
+                                            <input type="radio" name="rating" value="1" id="star-1">
+                                            <label for="star-1"></label>
+                                        </div>
+                                        @error('rating')
+                                            <i class="text-danger text-center">{{$message}}</i>
+                                        @enderror
+                                        <input type="hidden" name="advert" value="{{$my_ad->id}}">
+                                        <button class="btn btn-inline" type="submit">
+                                            <i class="fas fa-tint"></i>
+                                            <span>drop your review</span>
+                                        </button>
+                                    </form>
                                 @endif
                             </div>
                         </div>
-                        <div class="quantity-container info-container">
-                            <div class="row">
-                                <div class="add-btn">
-                                    <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> Contact vendor</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ad-details-price">
+                            <h5>{{'₦'.number_format($my_ad->price,2)}}</h5>
+                            <span>/@if($my_ad->price_type == 0) Negotiable @else Fixed @endif</span>
+                            <i class="flaticon-bargain"></i>
+                        </div>
+                        <button class="ad-details-number">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>Click to show the number</span>
+                        </button>
+                        <div class="ad-details-card">
+                            <div class="ad-details-title">
+                                <h5>author info</h5>
+                            </div>
+                            <div class="ad-details-profile">
+                                <div class="author-img">
+                                    <a href="#">
+                                        <img src="/images/avatar/01.jpg" alt="avatar">
+                                        <span class="author-status"></span>
+                                    </a>
+                                </div>
+                                <div class="author-intro">
+                                    <h4>
+                                        <a href="#">{{$my_ad->getCustomer->first_name ?? ''}} {{$my_ad->getCustomer->surname ?? ''}}</a>
+                                    </h4>
+                                    {{$my_ad->getCustomer->about ?? ''}}
+                                </div>
+                                <ul class="author-widget">
+                                    <li>
+                                        <a href="tel:{{$my_ad->getCustomer->company_phone ?? $my_ad->getCustomer->phone_no }}">
+                                            <i class="fas fa-phone-alt"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);"  data-toggle="modal" data-target="#exampleModal">
+                                            <i class="fas fa-envelope"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="favourite-seller">
+                                            <i class="fas fa-heart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="author-list">
+                                    <li>
+                                        <h6>total ads</h6>
+                                        <p>{{number_format(count($my_ad->getCustomer->getCustomerAdverts))}}</p>
+                                    </li>
+                                    <li>
+                                        <h6>total Reviews</h6>
+                                        <p>{{number_format(count($total_reviews))}}</p>
+                                    </li>
+
+                                </ul>
+                                <div class="author-details">
+                                    <h6>Member since: {{date('d F, Y', strtotime($my_ad->getCustomer->created_at))}}</h6>
+                                    <h6>address:{{$my_ad->getCustomer->address ?? $my_ad->getCustomer->company_address }}</h6>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-12 col-md-3">
-                    <div class="store-details">
-                        <img alt="" src="assets/images/brands/store.png"/>
-                        <h2><a href="#">{{$detail->getCustomer->first_name ?? '' }} {{$detail->getCustomer->surname ?? ''}}</a></h2>
-                        <p> nisi ut aliquip.</p>
-                    </div>
-                </div>
-            </div><!-- /.row -->
-        </div>
-        <div class="product-tabs inner-bottom-xs  wow fadeInUp">
-            <div class="row">
-                <div class="col-sm-3">
-                    <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
-                        <li class="active"><a data-toggle="tab" href="#description">Description</a></li>
-                        <li><a data-toggle="tab" href="#vendor">Vendor</a></li>
-                        <li><a data-toggle="tab" href="#review">Review</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-9">
-
-                    <div class="tab-content">
-
-                        <div id="description" class="tab-pane in active">
-                            <div class="product-tab">
-                                <p class="text"> {{$detail->description ?? ''}} </p>
+                        <div class="ad-details-card">
+                            <div class="ad-details-title">
+                                <h5>safety tips</h5>
                             </div>
-                        </div><!-- /.tab-pane -->
-                        <div id="vendor" class="tab-pane">
-                            <div class="product-tab">
-                                <h3>{{$detail->getCustomer->first_name ?? ''}} {{$detail->getCustomer->surname ?? ''}}</h3>
-                                <p class="text">
-                                    about vendor</br>
-                                </p>
+                            <div class="ad-details-safety">
+                                <ul>
+                                    <li>
+                                        <i class="fas fa-dot-circle"></i>
+                                        <p>Check the item before you buy</p>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-dot-circle"></i>
+                                        <p>Pay only after collecting item</p>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-dot-circle"></i>
+                                        <p>Beware of unrealistic offers</p>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div id="review" class="tab-pane">
-                            <div class="product-tab">
-                                <div class="product-reviews">
-                                    <h4 class="title">Customer Reviews</h4>
-
-                                    <div class="reviews">
-                                        <div class="review">
-                                            <div class="review-title"><span class="summary">We love this product</span><span class="date"><i class="fa fa-calendar"></i><span>1 days ago</span></span></div>
-                                            <div class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit."</div>
-                                        </div>
-
-                                    </div><!-- /.reviews -->
-                                </div><!-- /.product-reviews -->
-
-
-
-                                <div class="product-add-review">
-                                    <h4 class="title">Write your own review</h4>
-                                    <div class="review-table">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                <tr>
-                                                    <th class="cell-label">&nbsp;</th>
-                                                    <th>1 star</th>
-                                                    <th>2 stars</th>
-                                                    <th>3 stars</th>
-                                                    <th>4 stars</th>
-                                                    <th>5 stars</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td class="cell-label">Quality</td>
-                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="cell-label">Price</td>
-                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="cell-label">Value</td>
-                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                </tr>
-                                                </tbody>
-                                            </table><!-- /.table .table-bordered -->
-                                        </div><!-- /.table-responsive -->
-                                    </div><!-- /.review-table -->
-
-                                    <div class="review-form">
-                                        <div class="form-container">
-                                            <form class="cnt-form">
-
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputName">Your Name <span class="astk">*</span></label>
-                                                            <input type="text" class="form-control txt" id="exampleInputName" placeholder="">
-                                                        </div><!-- /.form-group -->
-                                                        <div class="form-group">
-                                                            <label for="exampleInputSummary">Summary <span class="astk">*</span></label>
-                                                            <input type="text" class="form-control txt" id="exampleInputSummary" placeholder="">
-                                                        </div><!-- /.form-group -->
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputReview">Review <span class="astk">*</span></label>
-                                                            <textarea class="form-control txt txt-review" id="exampleInputReview" rows="4" placeholder=""></textarea>
-                                                        </div><!-- /.form-group -->
-                                                    </div>
-                                                </div><!-- /.row -->
-
-                                                <div class="action text-right">
-                                                    <button class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
-                                                </div><!-- /.action -->
-
-                                            </form><!-- /.cnt-form -->
-                                        </div><!-- /.form-container -->
-                                    </div><!-- /.review-form -->
-
-                                </div><!-- /.product-add-review -->
-
-                            </div><!-- /.product-tab -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <section class="section wow fadeInUp">
-            <h3 class="section-title">Related Products {{$related/*->where('status', 1)*/->count()}}</h3>
-            <div class="new-arriavls">
-                <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
-                    @if($related->count() > 0 )
-                        @foreach($related as $item)
-                            <div class="item item-carousel">
-                                <div class="products">
-                                    <div class="product">
-                                        <div class="product-image">
-                                            <div class="image">
-                                                <a href="{{route('advert-detail', $item->slug)}}">
-                                                    <img src="/assets/attachments/ads/featured_image/{{$item->featured_image}}" alt="{{$item->title ?? ''}}">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-info text-left">
-                                            <div class="brand">{{$item->getCategory->category_name ?? ''}}</div>
-                                            <h3 class="name">
-                                                <a href="{{route('advert-detail', $item->slug)}}">{{strlen($item->title) > 35 ? substr($item->title,0,35).'...' : $item->title }}</a>
-                                            </h3>
-                                            <div class="rating rateit-small"></div>
-                                            <div class="description"></div>
-                                            <div class="product-price"> <span class="price"> ₦{{number_format($item->price ?? 0,2)}} </span>
-                                                <span class="price-before-discount">$ 800</span> </div>
-
-                                        </div>
-                                        @if(Auth::check())
-                                            <div class="cart clearfix animate-effect">
-                                                <div class="action">
-                                                    <ul class="list-unstyled">
-                                                        <li class="lnk wishlist">
-                                                            <a class="add-to-cart addToWishlist" data-toggle="tooltip" data-placement="right" title="Add to Wishlist" data-product="{{$item->id}}" href="javascript:void(0);" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        @endif
+                        <div class="ad-details-card">
+                            <div class="ad-details-title">
+                                <h5>featured ads</h5>
+                            </div>
+                            <div class="ad-details-feature slider-arrow">
+                                <div class="feature-card">
+                                    <div class="feature-img">
+                                        <a href="#">
+                                            <img src="/images/product/10.jpg" alt="feature">
+                                        </a>
                                     </div>
-
+                                    <div class="feature-badge">
+                                        <p>Featured</p>
+                                    </div>
+                                    <div class="feature-bookmark">
+                                        <button type="button">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                    <div class="feature-content">
+                                        <ol class="breadcrumb">
+                                            <li>
+                                                <span class="feature-cate rent">Rent</span>
+                                            </li>
+                                            <li class="breadcrumb-item">
+                                                <a href="#">automobile</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">Private Car</li>
+                                        </ol>
+                                        <div class="feature-title">
+                                            <h3>
+                                                <a href="#">Unde eveniet ducimus nostrum maiores soluta temporibus ipsum dolor sit amet.</a>
+                                            </h3>
+                                        </div>
+                                        <ul class="feature-meta">
+                                            <li>
+                                                <span>$1200
+                                                    <small>/Monthly</small>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-clock"></i>
+                                                <span>56 minute ago!</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-img">
+                                        <a href="#">
+                                            <img src="/images/product/01.jpg" alt="feature">
+                                        </a>
+                                    </div>
+                                    <div class="feature-badge">
+                                        <p>Featured</p>
+                                    </div>
+                                    <div class="feature-bookmark">
+                                        <button type="button">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                    <div class="feature-content">
+                                        <ol class="breadcrumb">
+                                            <li>
+                                                <span class="feature-cate booking">Booking</span>
+                                            </li>
+                                            <li class="breadcrumb-item">
+                                                <a href="#">Property</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">House</li>
+                                        </ol>
+                                        <div class="feature-title">
+                                            <h3>
+                                                <a href="#">Unde eveniet ducimus nostrum maiores soluta temporibus ipsum dolor sit amet.</a>
+                                            </h3>
+                                        </div>
+                                        <ul class="feature-meta">
+                                            <li>
+                                                <span>$800
+                                                    <small>/Per Day</small>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-clock"></i>
+                                                <span>56 minute ago!</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-img">
+                                        <a href="#">
+                                            <img src="/images/product/08.jpg" alt="feature">
+                                        </a>
+                                    </div>
+                                    <div class="feature-badge">
+                                        <p>Featured</p>
+                                    </div>
+                                    <div class="feature-bookmark">
+                                        <button type="button">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                    <div class="feature-content">
+                                        <ol class="breadcrumb">
+                                            <li>
+                                                <span class="feature-cate sale">sale</span>
+                                            </li>
+                                            <li class="breadcrumb-item">
+                                                <a href="#">Gadget</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">Iphone</li>
+                                        </ol>
+                                        <div class="feature-title">
+                                            <h3>
+                                                <a href="#">Unde eveniet ducimus nostrum maiores soluta temporibus ipsum dolor sit amet.</a>
+                                            </h3>
+                                        </div>
+                                        <ul class="feature-meta">
+                                            <li>
+                                                <span>$1150
+                                                    <small>/Negotiable</small>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-clock"></i>
+                                                <span>56 minute ago!</span>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        @endforeach
-                    @else
-                        <h6 class="text">There're no related products available at the moment.</h6>
-                    @endif
+                        </div>
+                    </div>
                 </div>
             </div>
-            @if(Auth::check())
-                <input type="hidden" name="customer" id="customer" value="{{Auth::user()->id}}">
-            @endif
         </section>
-    </div>
-@endsection
+        <section class="related-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-center-heading">
+                            <h2>Our Related
+                                <span>Ads</span>
+                            </h2>
+                            <p>Other ads in this category or location.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="related-slider slider-arrow">
+                            @foreach ($related as $relate)
+                                <div class="product-card">
+                                    <div class="product-head">
+                                        <div class="product-img" style="background:url(/attachments/featured-images/{{$relate->featured_image}}) no-repeat center; background-size:cover;">
 
+                                            <span class="flat-badge booking">{{$relate->getCategory->category_name ?? ''}}</span>
+                                            <ul class="product-meta">
+                                                <li>
+                                                    <i class="fas fa-eye"></i>
+                                                    <p>{{$relate->getViews->count()}}</p>
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-star"></i>
+                                                    <p>{{number_format($relate->getAdvertReviews->count())}}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="product-tag">
+                                            <i class="fas fa-tags"></i>
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item">
+                                                    <a href="#">{{$relate->getCategory->category_name ?? ''}}</a>
+                                                </li>
+                                                <li class="breadcrumb-item active" aria-current="page">{{$relate->getSubCategory->sub_category_name ?? ''}}</li>
+                                            </ol>
+                                        </div>
+                                        <div class="product-title">
+                                            <h5>
+                                                <a href="{{route('view-advert', $relate->slug)}}">{{strlen($relate->title) > 17 ? substr($relate->title,0,17).'...' : $relate->title  }}</a>
+                                            </h5>
+                                            <ul class="product-location">
+                                                <li>
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    <p>{{$relate->getLocation->location_name ?? ''}}</p>
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-clock"></i>
+                                                    <p>{{$relate->created_at->diffForHumans()}}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="product-details">
+                                            <div class="product-price">
+                                                <h5>{{'₦'.number_format($relate->price ?? 0,2)}}</h5>
+                                                <span></span>
+                                            </div>
+                                            <ul class="product-widget">
+                                                <li>
+                                                    <button class="tooltip addToWishlist" data-product="{{$relate->id}}">
+                                                        <i class="far fa-heart"></i>
+                                                        <span class="tooltext top">Watchlist</span>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="center-50">
+                            <a href="{{route('get-advert-by-category', $my_ad->getCategory->slug)}}" class="btn btn-inline">
+                                <i class="fas fa-eye"></i>
+                                <span>view all related Ads</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Message {{$my_ad->getCustomer->first_name ?? ''}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form class="ad-review-form" method="post" action="{{route('message-seller')}}">
+            @csrf
+            <div class="form-group">
+                <textarea class="form-control" placeholder="Type message here..." name="message" style="resize: none;"></textarea>
+            </div>
+            <input type="hidden" name="to" value="{{$my_ad->customer_id}}">
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-inline" type="submit">
+                    <i class="fas fa-tint"></i>
+                    <span>submit</span>
+                </button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
 @section('extra-scripts')
-    <script src="/assets/js/interaction.js"></script>
+    <script src="/js/custom/price-range.js"></script>
 @endsection

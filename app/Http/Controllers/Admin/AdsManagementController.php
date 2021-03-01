@@ -6,6 +6,7 @@ use App\Models\Package;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Support\Str;
 use App\Models\Area;
 use App\Models\Ad;
 
@@ -28,8 +29,20 @@ class AdsManagementController extends Controller
         $this->validate($request,[
             'category_name'=>'required|unique:categories,category_name'
         ]);
+         if (!empty($request->file('featured_image'))) {
+           $image = Image::make($request->file('featured_image'));
+            $extension = $request->file('featured_image')->getClientOriginalExtension();
+            $dir = 'attachments/category/featured-images/';
+            $featured_image = '_' . uniqid() . '_' . time() . '_' . date('Ymd') . '.' . $extension;
+
+            $image->save(public_path($dir.$featured_image));
+        } else {
+            $featured_image = '';
+        }
         $category = new Category;
         $category->category_name = $request->category_name;
+        $category->featured_image = $featured_image;
+        $category->slug = Str::slug($request->category_name.'_'.substr(sha1(time()),32,40));
         $category->save();
         session()->flash("success", "<strong>Success!</strong> New category added.");
         return redirect()->route('categories');
