@@ -48,7 +48,7 @@ class Customer extends Authenticatable
         return $this->hasMany(AdsWatchList::class, 'advertised_by');
     }
     public function getMyWatchlist(){
-        return $this->hasMany(AdsWatchList::class, 'customer_id');
+        return $this->hasMany(Wishlist::class, 'customer_id');
     }
     public function getSingleWatchlist(){
         return $this->belongsTo(Wishlist::class, 'product_id');

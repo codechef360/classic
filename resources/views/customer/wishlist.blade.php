@@ -34,24 +34,16 @@
                 </div>
             </div>
             <div class="row">
-                @if (Auth::user()->getMyWatchlist->count() > 0)
-                    @foreach (Auth::user()->getWatchlist as $item)
+
+                @if (count($watchlist) > 0)
+                    @foreach ($watchlist as $item)
                         <div class="col-sm-6 col-md-4 col-lg-3 card-grid">
                             <div class="product-card">
                                 <div class="product-head">
-                                    <div class="product-img" style="background:url(/attachments/featured-images/{{$item->featured_image}}) no-repeat center; background-size:cover;">
+                                    <div class="product-img" style="background:url(/attachments/featured-images/{{$item->getAdvert->featured_image}}) no-repeat center; background-size:cover;">
 
-                                        <span class="flat-badge rent">{{$item->getCategory->category_name ?? ''}}</span>
-                                        <ul class="product-meta">
-                                            <li>
-                                                <i class="fas fa-eye"></i>
-                                                <p>{{number_format($item->getViews->count())}}</p>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                                <p>{{number_format($item->getAdvertReviews->count())}}</p>
-                                            </li>
-                                        </ul>
+                                        <span class="flat-badge rent">{{$item->getAdvert->getCategory->category_name ?? ''}}</span>
+
                                     </div>
                                 </div>
                                 <div class="product-info">
@@ -59,36 +51,36 @@
                                         <i class="fas fa-tags"></i>
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a href="#">{{$item->getCategory->category_name ?? ''}}</a>
+                                                <a href="#">{{$item->getAdvert->getCategory->category_name ?? ''}}</a>
                                             </li>
-                                            <li class="breadcrumb-item active" aria-current="page">{{$item->getSubCategory->sub_category_name ?? ''}}</li>
+                                            <li class="breadcrumb-item active" aria-current="page">{{$item->getAdvert->getSubCategory->sub_category_name ?? ''}}</li>
                                         </ol>
                                     </div>
                                     <div class="product-title">
                                         <h5>
-                                            <a href="{{route('view-advert', $item->slug)}}">{{strlen($item->title) > 17 ? substr($item->title,0,17).'...' : $item->title  }}</a>
+                                            <a href="{{route('view-advert', $item->getAdvert->slug)}}">{{strlen($item->getAdvert->title) > 17 ? substr($item->getAdvert->title,0,17).'...' : $item->getAdvert->title  }}</a>
                                         </h5>
                                         <ul class="product-location">
                                             <li>
                                                 <i class="fas fa-map-marker-alt"></i>
-                                                <p>{{$item->getLocation->location_name ?? ''}}</p>
+                                                <p>{{$item->getAdvert->getLocation->location_name ?? ''}}</p>
                                             </li>
                                             <li>
                                                 <i class="fas fa-clock"></i>
-                                                <p>{{$item->created_at->diffForHumans()}}</p>
+                                                <p>{{$item->getAdvert->created_at->diffForHumans()}}</p>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="product-details">
                                         <div class="product-price">
-                                            <h5>{{'₦'.number_format($item->price,2)}}</h5>
-                                            <span>/@if($item->price_type == 0) Negotiable @else Fixed @endif</span>
+                                            <h5>{{'₦'.number_format($item->getAdvert->price,2)}}</h5>
+                                            <span>/@if($item->getAdvert->price_type == 0) Negotiable @else Fixed @endif</span>
                                         </div>
                                         <ul class="product-widget">
                                             <li>
-                                                <button class="tooltip addToWishlist" data-product="{{$item->id}}">
+                                                <button class="tooltip addToWishlist" data-product="{{$item->getAdvert->id}}">
 
-                                                        <i class="far fa-heart"></i>
+
 
                                                         <i class="far fa-heart fas"></i>
 
@@ -117,31 +109,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#">
-                                <i class="fas fa-long-arrow-alt-left"></i>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link active" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">...</li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">67</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </a>
-                        </li>
-                    </ul>
+                    {{$watchlist->links('vendor.pagination.default')}}
                 </div>
             </div>
         </div>

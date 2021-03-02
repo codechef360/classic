@@ -9,6 +9,7 @@ use App\Models\AdsReview;
 use App\Models\Message;
 use App\Models\ReplyMessage;
 use App\Models\ReportAdvert;
+use App\Models\Wishlist;
 use Auth;
 use Image;
 
@@ -41,7 +42,8 @@ class CustomerController extends Controller
         }
     }
     public function wishlist(){
-        return view('customer.wishlist');
+        $watchlist = Wishlist::where('customer_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate(20);
+        return view('customer.wishlist',['watchlist'=>$watchlist]);
     }
 
     public function saveChanges(Request $request){
