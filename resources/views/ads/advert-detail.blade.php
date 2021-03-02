@@ -87,12 +87,6 @@
                                 <ul>
                                     <li>
                                         <button type="button">
-                                            <i class="fas fa-heart"></i>
-                                            <span>Watchlist</span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button type="button">
                                             <i class="fas fa-exclamation-triangle"></i>
                                             <span>report</span>
                                         </button>
@@ -245,9 +239,10 @@
                             <span>/@if($my_ad->price_type == 0) Negotiable @else Fixed @endif</span>
                             <i class="flaticon-bargain"></i>
                         </div>
-                        <button class="ad-details-number">
+                        <button class="ad-details-number showNumberBtn">
                             <i class="fas fa-phone-alt"></i>
-                            <span>Click to show the number</span>
+                            <span id="showNumber">Click to show the number</span>
+                            <span id="phoneNo">{{$my_ad->getCustomer->phone_no ?? 'No Phone Number'}}</span>
                         </button>
                         <div class="ad-details-card">
                             <div class="ad-details-title">
@@ -583,5 +578,21 @@
 </div>
 @endsection
 @section('extra-scripts')
-    <script src="/js/custom/price-range.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#phoneNo').hide();
+            $(document).on('click', '.showNumberBtn', function(e){
+                $('#showNumber').hide();
+                $('#phoneNo').show();
+                $(this).removeClass('showNumberBtn');
+                $(this).addClass('hideNumberBtn');
+            });
+             $(document).on('click', '.hideNumberBtn', function(e){
+                $('#showNumber').show();
+                $('#phoneNo').hide();
+                $(this).removeClass('hideNumberBtn');
+                $(this).addClass('showNumberBtn');
+            });
+        });
+    </script>
 @endsection
