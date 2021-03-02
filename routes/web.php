@@ -63,6 +63,7 @@ Route::get('/my-messages', [App\Http\Controllers\CustomerController::class, 'myM
 Route::get('/message/read/{slug}', [App\Http\Controllers\CustomerController::class, 'readMessage'])->name('read-message');
 Route::post('/message/reply', [App\Http\Controllers\CustomerController::class, 'replyMessage'])->name('reply-message');
 Route::get('/notifications', [App\Http\Controllers\CustomerController::class, 'notifications'])->name('notifications');
+Route::post('/get-location', [App\Http\Controllers\CustomerController::class, 'getLocations']);
 
 
 

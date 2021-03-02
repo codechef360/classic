@@ -13,6 +13,7 @@
 @endsection
 @section('extra-styles')
     <link rel="stylesheet" href="/css/custom/setting.css">
+    <link rel="stylesheet" href="/css/custom/select2.min.css">
 @endsection
 @section('current-page')
     Settings
@@ -127,8 +128,11 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-label">Location<sup class="text-danger">*</sup></label>
-                                            <select name="location" id="location" class="form-control">
+                                            <select name="location" id="location" class="form-control js-example-basic-single">
                                                 <option selected disabled>--Select location--</option>
+                                                @foreach ($locations as $locate)
+                                                    <option value="{{$locate->id}}">{{$locate->location_name ?? ''}}</option>
+                                                @endforeach
                                             </select>
                                             @error('location')
                                                 <i class="text-danger">{{$message}}</i>
@@ -138,9 +142,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-label">Area<sup class="text-danger">*</sup></label>
-                                            <select name="area" id="area" class="form-control">
-                                                <option selected disabled>--Select area--</option>
-                                            </select>
+                                            <div id="area-wrapper"></div>
                                             @error('area')
                                                 <i class="text-danger">{{$message}}</i>
                                             @enderror
@@ -177,4 +179,22 @@
                 </div>
             </div>
         </div>
+@endsection
+@section('extra-scripts')
+<script src="/js/custom/select2.min.js"></script>
+<script src="/js/custom/axios.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.js-example-basic-single').select2();
+        $(document).on('change', '#location', function(e){
+            e.preventDefault();
+            axios.post('/get-location', {location:$(this).val()})
+            .then(response=>{
+                $('#area-wrapper').html(response.data)
+                   // $(".js-example-basic-single").select2();
+            });
+        });
+    });
+</script>
+
 @endsection

@@ -10,6 +10,8 @@ use App\Models\Message;
 use App\Models\ReplyMessage;
 use App\Models\ReportAdvert;
 use App\Models\Wishlist;
+use App\Models\Location;
+use App\Models\Area;
 use Auth;
 use Image;
 
@@ -26,7 +28,8 @@ class CustomerController extends Controller
     }
 
     public function settings(){
-        return view('customer.settings');
+        $locations = Location::orderBy('location_name', 'ASC')->get();
+        return view('customer.settings',['locations'=>$locations]);
     }
     public function myAdverts(){
         $myAds = Ad::where('customer_id', Auth::user()->id)->orderBy('id','DESC')->paginate(2);
@@ -56,8 +59,8 @@ class CustomerController extends Controller
             'about_us'=>'required',
             'company_name'=>'required',
             'office_address'=>'required',
-            //'location'=>'required',
-            //'area'=>'required',
+            'location'=>'required',
+            'area'=>'required',
         ]);
         if (!empty($request->file('avatar'))) {
            $image = Image::make($request->file('avatar'));
@@ -89,9 +92,9 @@ class CustomerController extends Controller
         $changes->website = $request->website ?? '';
         $changes->avatar = $avatar ?? 'avatar.png';
         $changes->logo = $logo ?? 'logo.png';
-        $changes->location_id = 1;//$request->location ?? '';
+        $changes->location_id = $request->location ?? '';
         //$changes->website = $request->website ?? '';
-        $changes->area_id = 1;// $request->area ?? '';
+        $changes->area_id = $request->area ?? '';
         $changes->save();
         session()->flash("success", "<strong>Success!</strong> Changes saved.");
         return redirect()->route('profile');
@@ -158,6 +161,9 @@ class CustomerController extends Controller
         return view('customer.notifications');
     }
 
-
+    public function getLocations(Request $request){
+        $areas = Area::where('location_id', $request->location)->orderBy('area_name', 'ASC')->get();
+    return view('partials._area-select',['areas'=>$areas]);
+   }
 
 }
