@@ -161,8 +161,8 @@
                                                 <div class="review-head">
                                                     <div class="review-author">
                                                         <div class="review-avatar">
-                                                            <a href="#">
-                                                                <img src="/images/avatar/03.jpg" alt="review">
+                                                            <a href="javascript:void(0);">
+                                                                <img src="/attachments/avatar/{{$my_ad->getCustomer->avatar ?? 'avatar.png'}}" alt="review">
                                                             </a>
                                                         </div>
                                                         <div class="review-meta">
@@ -256,8 +256,8 @@
                             <div class="ad-details-profile">
                                 <div class="author-img">
                                     <a href="#">
-                                        <img src="/images/avatar/01.jpg" alt="avatar">
-                                        <span class="author-status"></span>
+                                        <img src="/attachments/avatar/{{$my_ad->getCustomer->avatar ?? 'avatar.png'}}" alt="avatar">
+
                                     </a>
                                 </div>
                                 <div class="author-intro">
