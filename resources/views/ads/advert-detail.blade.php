@@ -64,7 +64,7 @@
                                     <a href="#">
                                         <i class="fas fa-heart"></i>
                                         <p>Watchlist
-                                            <span>({{number_format(count($my_ad->getWatchlist))}})</span>
+                                            <span>({{number_format(count($my_ad->getMyWatchlist))}})</span>
                                         </p>
                                     </a>
                                 </li>
