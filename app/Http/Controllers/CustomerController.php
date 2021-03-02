@@ -8,6 +8,7 @@ use App\Models\Ad;
 use App\Models\AdsReview;
 use App\Models\Message;
 use App\Models\ReplyMessage;
+use App\Models\ReportAdvert;
 use Auth;
 use Image;
 
@@ -107,6 +108,21 @@ class CustomerController extends Controller
         $message->slug = sha1(time());
         $message->save();
         session()->flash("message-success", "<strong>Success!</strong> Message delivered.");
+        return back();
+    }
+    public function reportSeller(Request $request){
+        $this->validate($request,[
+            'seller'=>'required',
+            'statement'=>'required'
+        ]);
+
+        $report = new ReportAdvert; //reportSeller
+        $report->customer_id = $request->seller;
+        $report->reporter_id = Auth::user()->id;
+        $report->statement = $request->statement;
+        $report->slug = sha1(time());
+        $report->save();
+        session()->flash("message-success", "<strong>Success!</strong> Report submitted.");
         return back();
     }
 

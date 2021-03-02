@@ -20,6 +20,7 @@ class CreateReportAdvertsTable extends Migration
             $table->unsignedBigInteger('admin_user_id')->nullable();
             $table->tinyInteger('status')->default(0)->comment('0=Do nothing, 1=Warning, 2=Suspended, 3=Terminated');
             $table->text('statement');
+            $table->string('slug');
             $table->timestamps();
         });
     }

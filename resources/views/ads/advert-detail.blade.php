@@ -83,16 +83,19 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <div class="ad-details-action">
-                                <ul>
-                                    <li>
-                                        <button type="button">
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                            <span>report</span>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
+                            @if (Auth::check())
+                                <div class="ad-details-action">
+                                    <ul>
+                                        <li>
+                                            <button type="button" data-toggle="modal" data-target="#reportModal">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                                <span>report</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            @endif
                         </div>
                         <div class="ad-details-card">
                             <div class="ad-details-title">
@@ -548,34 +551,62 @@
                 </div>
             </div>
         </section>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Message {{$my_ad->getCustomer->first_name ?? ''}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <form class="ad-review-form" method="post" action="{{route('message-seller')}}">
-            @csrf
-            <div class="form-group">
-                <textarea class="form-control" placeholder="Type message here..." name="message" style="resize: none;"></textarea>
-            </div>
-            <input type="hidden" name="to" value="{{$my_ad->customer_id}}">
-            <div class="btn-group">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button class="btn btn-inline" type="submit">
-                    <i class="fas fa-tint"></i>
-                    <span>submit</span>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message {{$my_ad->getCustomer->first_name ?? ''}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        </form>
-      </div>
+            <div class="modal-body">
+                <form class="ad-review-form" method="post" action="{{route('message-seller')}}">
+                    @csrf
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Type message here..." name="message" style="resize: none;"></textarea>
+                    </div>
+                    <input type="hidden" name="to" value="{{$my_ad->customer_id}}">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button class="btn btn-inline" type="submit">
+                            <i class="fas fa-tint"></i>
+                            <span>submit</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Report This Advert</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form class="ad-review-form" method="post" action="{{route('report-seller')}}">
+                @csrf
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Type your statement here..." name="statement" style="resize: none;"></textarea>
+                </div>
+                <input type="hidden" name="seller" value="{{$my_ad->customer_id}}">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-inline" type="submit">
+                        <i class="fas fa-tint"></i>
+                        <span>submit Report</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
 @endsection
 @section('extra-scripts')
     <script>

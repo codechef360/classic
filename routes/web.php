@@ -58,6 +58,7 @@ Route::post('/save-changes', [App\Http\Controllers\CustomerController::class, 's
 Route::get('/my-adverts', [App\Http\Controllers\CustomerController::class, 'myAdverts'])->name('my-adverts');
 Route::get('/advert/detail/{slug}', [App\Http\Controllers\CustomerController::class, 'myAdvertDetail'])->name('my-advert-detail');
 Route::post('/message-seller', [App\Http\Controllers\CustomerController::class, 'messageSeller'])->name('message-seller');
+Route::post('/report-seller', [App\Http\Controllers\CustomerController::class, 'reportSeller'])->name('report-seller');
 Route::get('/my-messages', [App\Http\Controllers\CustomerController::class, 'myMessages'])->name('my-messages');
 Route::get('/message/read/{slug}', [App\Http\Controllers\CustomerController::class, 'readMessage'])->name('read-message');
 Route::post('/message/reply', [App\Http\Controllers\CustomerController::class, 'replyMessage'])->name('reply-message');
