@@ -129,18 +129,16 @@
                                                     <h5>{{'₦'.number_format($item->price,2)}}</h5>
                                                     <span>/@if($item->price_type == 0) Negotiable @else Fixed @endif</span>
                                                 </div>
-                                                <ul class="product-widget">
-                                                    <li>
-                                                        <button class="tooltip addToWishlist" data-product="{{$item->id}}">
-
-                                                                <i class="far fa-heart"></i>
-
-                                                                <i class="far fa-heart fas"></i>
-
-                                                            <span class="tooltext top">Watchlist</span>
-                                                        </button>
-                                                    </li>
-                                                </ul>
+                                                @if (Auth::check())
+                                                    <ul class="product-widget">
+                                                        <li>
+                                                            <button class="tooltip addToWishlist" data-product="{{$item->id}}">
+                                                                    <i class="far fa-heart"></i>
+                                                                <span class="tooltext top">Watchlist</span>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

@@ -4,4 +4,5 @@
 <script src="/js/vendor/slick.min.js"></script>
 <script src="/js/custom/slick.js"></script>
 <script src="/js/custom/main.js"></script>
+<script src="/js/custom/toastify.min.js"></script>
 @yield('extra-scripts')

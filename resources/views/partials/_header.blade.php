@@ -21,4 +21,5 @@
     @yield('extra-styles')
     <link rel="stylesheet" href="/css/custom/main.css">
     <link rel="stylesheet" href="/css/custom/index.css">
+    <link rel="stylesheet" href="/css/custom/toastify.css">
 </head>

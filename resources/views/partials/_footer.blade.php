@@ -73,7 +73,7 @@
                     <div class="col-sm-6 col-md-6 col-lg-3">
                         <div class="footer-info">
                             <a href="#">
-                                <img src="images/logo.png" alt="logo">
+                                <img src="/images/logo.png" alt="logo">
                             </a>
                             <ul class="footer-count">
                                 <li>
@@ -93,16 +93,16 @@
                         <div class="footer-card-content">
                             <div class="footer-payment">
                                 <a href="#">
-                                    <img src="images/pay-card/01.jpg" alt="01">
+                                    <img src="/images/pay-card/01.jpg" alt="01">
                                 </a>
                                 <a href="#">
-                                    <img src="images/pay-card/02.jpg" alt="02">
+                                    <img src="/images/pay-card/02.jpg" alt="02">
                                 </a>
                                 <a href="#">
-                                    <img src="images/pay-card/03.jpg" alt="03">
+                                    <img src="/images/pay-card/03.jpg" alt="03">
                                 </a>
                                 <a href="#">
-                                    <img src="images/pay-card/04.jpg" alt="04">
+                                    <img src="/images/pay-card/04.jpg" alt="04">
                                 </a>
                             </div>
                             <div class="footer-option">
@@ -115,10 +115,10 @@
                             </div>
                             <div class="footer-app">
                                 <a href="#">
-                                    <img src="images/play-store.png" alt="play-store">
+                                    <img src="/images/play-store.png" alt="play-store">
                                 </a>
                                 <a href="#">
-                                    <img src="images/app-store.png" alt="app-store">
+                                    <img src="/images/app-store.png" alt="app-store">
                                 </a>
                             </div>
                         </div>
