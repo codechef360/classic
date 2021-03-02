@@ -9,6 +9,7 @@ use App\Models\AdsReview;
 use App\Models\Message;
 use App\Models\ReplyMessage;
 use Auth;
+use Image;
 
 
 class CustomerController extends Controller
@@ -55,7 +56,24 @@ class CustomerController extends Controller
             //'location'=>'required',
             //'area'=>'required',
         ]);
-
+        if (!empty($request->file('avatar'))) {
+           $image = Image::make($request->file('avatar'));
+            $extension = $request->file('avatar')->getClientOriginalExtension();
+            $dir = 'attachments/avatar/';
+            $avatar = '_' . uniqid() . '_' . time() . '_' . date('Ymd') . '.' . $extension;
+            $image->save(public_path($dir.$avatar));
+        } else {
+            $avatar = '';
+        }
+        if (!empty($request->file('logo'))) {
+           $image = Image::make($request->file('logo'));
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            $dir = 'attachments/logo/';
+            $logo = '_' . uniqid() . '_' . time() . '_' . date('Ymd') . '.' . $extension;
+            $image->save(public_path($dir.$logo));
+        } else {
+            $logo = '';
+        }
         $changes = Customer::find(Auth::user()->id);
         $changes->first_name = $request->first_name;
         $changes->surname = $request->surname;
@@ -66,6 +84,8 @@ class CustomerController extends Controller
         $changes->company_name = $request->company_name ?? '';
         $changes->company_address = $request->office_address ?? '';
         $changes->website = $request->website ?? '';
+        $changes->avatar = $avatar ?? 'avatar.png';
+        $changes->logo = $logo ?? 'logo.png';
         $changes->location_id = 1;//$request->location ?? '';
         //$changes->website = $request->website ?? '';
         $changes->area_id = 1;// $request->area ?? '';

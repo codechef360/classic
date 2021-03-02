@@ -6,7 +6,7 @@
                             <div class="dash-header-left">
                                 <div class="dash-avatar">
                                     <a href="#">
-                                        <img src="/images/avatar/01.jpg" alt="avatar">
+                                        <img src="/attachments/avatar/{{Auth::user()->avatar ?? 'avatar.png'}}" alt="{{Auth::user()->first_name ?? ''}}">
                                     </a>
                                 </div>
                                 <div class="dash-intro">

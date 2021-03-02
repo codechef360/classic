@@ -31,10 +31,10 @@
                         <div class="product-card inline">
                             <div class="product-head">
                                 <div class="dash-avatar">
-                                        <a href="#">
-                                            <img src="/images/avatar/01.jpg" alt="avatar">
-                                        </a>
-                                    </div>
+                                    <a href="javascript:void(0);">
+                                        <img src="/attachments/avatar/{{Auth::user()->id == $item->notifiable_id ? Auth::user()->avatar : $item->getNotifiableUser->avatar}}" alt="avatar">
+                                    </a>
+                                </div>
                             </div>
                             <div class="product-info">
                                 <div class="product-tag">
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="product-title">
                                     <h5>
-                                        <a href="#">{{$item->data}}</a>
+                                        <a href="javascript:void(0);">{{$item->data}}</a>
                                     </h5>
                                     <ul class="product-location">
                                         <li>

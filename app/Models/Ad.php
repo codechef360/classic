@@ -31,8 +31,8 @@ class Ad extends Model
     public function getViews(){
         return $this->hasMany(AdsView::class, 'ads_id');
     }
-    public function getWatchlist(){
-        return $this->hasMany(AdsWatchlist::class, 'ads_id');
+    public function getMyWatchlist(){
+        return $this->hasMany(AdsWatchlist::class, 'customer_id');
     }
 
     public function getGalleryImages(){

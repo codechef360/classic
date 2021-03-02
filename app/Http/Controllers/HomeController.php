@@ -103,7 +103,7 @@ class HomeController extends Controller
         $cat = Category::where('slug', $slug)->first();
         if(!empty($cat)){
             $adverts = Ad::where('category_id', $cat->id)->paginate(10);
-            return view('related-ads',['adverts'=>$adverts]);
+            return view('related-ads',['adverts'=>$adverts, 'cat'=>$cat]);
         }else{
             return back();
         }

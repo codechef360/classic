@@ -31,7 +31,7 @@
                             <div class="product-head">
                                 <div class="dash-avatar">
                                         <a href="#">
-                                            <img src="/images/avatar/01.jpg" alt="avatar">
+                                            <img src="/attachments/avatar/{{Auth::user()->id == $item->getTo->to_id ? $item->getTo->avatar : $item->getFrom->avatar}}" alt="avatar">
                                         </a>
                                     </div>
                             </div>
@@ -62,31 +62,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#">
-                                <i class="fas fa-long-arrow-alt-left"></i>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link active" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">...</li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">67</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </a>
-                        </li>
-                    </ul>
+                   {{--  {{Auth::user()->getMyMessages->links('vendor.pagination.default')}} --}}
                 </div>
             </div>
         </div>

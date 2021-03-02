@@ -1,22 +1,5 @@
         <footer class="footer-part">
             <div class="container">
-                <div class="row newsletter">
-                    <div class="col-lg-6">
-                        <div class="news-content">
-                            <h2>Subscribe for Latest Offers</h2>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, aliquid reiciendis! Exercitationem soluta provident non.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <form class="news-form">
-                            <input type="text" placeholder="Enter Your Email Address">
-                            <button class="btn btn-inline">
-                                <i class="fas fa-envelope"></i>
-                                <span>Subscribe</span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-sm-6 col-md-6 col-lg-3">
                         <div class="footer-content">
@@ -146,7 +129,7 @@
                 <div class="container">
                     <div class="footer-end-content">
                         <p>All Copyrights Reserved &copy; 2021 - Developed by
-                            <a href="#">Mironcoder</a>
+                            <a href="#">{{config('app.name')}}</a>
                         </p>
                         <ul class="social-transparent footer-social">
                             <li>

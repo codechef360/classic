@@ -84,11 +84,11 @@
                 <div class="sidebar-content">
                    @if(Auth::check())
                         <div class="sidebar-profile">
-                            <a href="#" class="sidebar-avatar">
-                                <img src="images/avatar/01.jpg" alt="avatar">
+                            <a href="{{route('home')}}" class="sidebar-avatar">
+                                <img src="/attachments/avatar/{{Auth::user()->avatar ?? 'avatar.png'}}" alt="avatar">
                             </a>
                             <h4>
-                                <a href="#" class="sidebar-name">{{Auth::user()->first_name ?? ''}} {{Auth::user()->surname ?? ''}}</a>
+                                <a href="{{route('home')}}" class="sidebar-name">{{Auth::user()->first_name ?? ''}} {{Auth::user()->surname ?? ''}}</a>
                             </h4>
                             <a href="{{route('post-your-ad')}}" class="btn btn-inline sidebar-btn">
                                 <i class="fas fa-plus-circle"></i>
@@ -140,9 +140,6 @@
                         <div class="tab-pane" id="author-menu">
                             <ul class="navbar-list">
                                 <li class="navbar-item">
-                                    <a class="navbar-link" href="dashboard.html">Dashboard</a>
-                                </li>
-                                <li class="navbar-item">
                                     <a class="navbar-link" href="{{route('profile')}}">Profile</a>
                                 </li>
                                 <li class="navbar-item">
@@ -155,7 +152,7 @@
                                     <a class="navbar-link" href="{{route('settings')}}">Settings</a>
                                 </li>
                                 <li class="navbar-item navbar-dropdown">
-                                    <a class="navbar-link" href="bookmark.html">
+                                    <a class="navbar-link" href="{{route('wishlist')}}">
                                         <span>Watchlist</span>
                                         <span>{{number_format(Auth::user()->getMyWatchlist->count())}}</span>
                                     </a>

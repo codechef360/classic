@@ -501,7 +501,7 @@
                                             <i class="fas fa-tags"></i>
                                             <ol class="breadcrumb">
                                                 <li class="breadcrumb-item">
-                                                    <a href="#">{{$relate->getCategory->category_name ?? ''}}</a>
+                                                    <a href="{{route('get-advert-by-category', $relate->getCategory->slug)}}">{{$relate->getCategory->category_name ?? ''}}</a>
                                                 </li>
                                                 <li class="breadcrumb-item active" aria-current="page">{{$relate->getSubCategory->sub_category_name ?? ''}}</li>
                                             </ol>

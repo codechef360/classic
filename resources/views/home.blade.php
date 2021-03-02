@@ -35,7 +35,7 @@
                             </div>
                             <div class="suggest-meta">
                                 <h6>
-                                    <a href="#">{{$sliderCat->category_name ?? ''}}</a>
+                                    <a  href="{{route('get-advert-by-category', $sliderCat->slug)}}">{{$sliderCat->category_name ?? ''}}</a>
                                 </h6>
                             </div>
                         </div>
@@ -50,9 +50,6 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-12">
                                 <div class="product-sidebar">
-                                    <div class="product-sidebar-title">
-                                        <h6>Filter by Categories</h6>
-                                    </div>
                                     <div class="product-sidebar-content">
                                         <ul class="nasted-dropdown">
                                             @foreach ($categories as $category)
@@ -60,7 +57,7 @@
                                                     <div class="nasted-menu">
                                                         <p>
                                                             <span class="fas fa-tags"></span>
-                                                            {{$category->category_name ?? ''}}
+                                                            <a class="text-muted" href="{{route('get-advert-by-category', $category->slug)}}">{{$category->category_name ?? ''}}</a>
                                                         </p>
                                                         <i class="fas fa-chevron-down"></i>
                                                     </div>
@@ -68,7 +65,7 @@
                                                         <ul class="nasted-menu-list">
                                                             @foreach ($category->getSubCategories as $sub)
                                                                 <li>
-                                                                    <a href="#">{{$sub->sub_category_name ?? ''}}</a>
+                                                                    {{$sub->sub_category_name ?? ''}}
                                                                 </li>
                                                             @endforeach
                                                         </ul>
@@ -107,7 +104,7 @@
                                                 <i class="fas fa-tags"></i>
                                                 <ol class="breadcrumb">
                                                     <li class="breadcrumb-item">
-                                                        <a href="#">{{$item->getCategory->category_name ?? ''}}</a>
+                                                        <a href="{{route('get-advert-by-category', $item->getCategory->slug)}}">{{$item->getCategory->category_name ?? ''}}</a>
                                                     </li>
                                                     <li class="breadcrumb-item active" aria-current="page">{{$item->getSubCategory->sub_category_name ?? ''}}</li>
                                                 </ol>
