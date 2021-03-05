@@ -45,7 +45,7 @@
                             <td>{{$customer->registered_by == 0 ? 'Self' : $customer->getRegisteredBy->first_name.' '.$customer->getRegisteredBy->surname }} </td>
                             <td>{{date('d M, Y', strtotime($customer->created_at))}}</td>
                             <td>
-                                <a href="{{route('customer-profile', $customer->slug)}}" class="badge badge-classic badge-primary text-uppercase">View</a>
+                                <a href="{{route('donzy.customer-profile', $customer->slug)}}" class="badge badge-classic badge-primary text-uppercase">View</a>
                             </td>
                         </tr>
                     @endforeach

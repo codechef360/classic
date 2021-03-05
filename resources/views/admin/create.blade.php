@@ -9,7 +9,7 @@
 @section('main-content')
 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
     <div class="widget-content widget-content-area br-6">
-        <form class="needs-validation" novalidate action="{{route('add-new-employee')}}" method="post">
+        <form class="needs-validation" novalidate action="{{route('donzy.add-new-employee')}}" method="post">
             @csrf
             <div class="form-row">
                 <div class="col-md-4 mb-4">

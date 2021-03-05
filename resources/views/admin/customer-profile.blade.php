@@ -293,7 +293,7 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <a href="{{route('view-advert', $advert->slug)}}" class="badge badge-classic badge-primary text-uppercase">View</a>
+                                                            <a href="{{route('donzy.view-advert', $advert->slug)}}" class="badge badge-classic badge-primary text-uppercase">View</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

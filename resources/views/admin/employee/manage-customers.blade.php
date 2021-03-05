@@ -17,7 +17,7 @@
         <div class="widget-content widget-content-area br-6">
             <h3>Manage Customers</h3>
             <p>This list consists of all the companies/customers you've registered on <code>{{config('app.name') }}</code>.</p>
-            <a class="btn btn-primary btn-rounded mb-2 " href="{{route('add-new-customer')}}">Add New Customer</a>
+            <a class="btn btn-primary btn-rounded mb-2 " href="{{route('donzy.add-new-customer')}}">Add New Customer</a>
             <div class="table-responsive mb-4 mt-4">
                 @if (session()->has('success'))
                     <div class="alert-success alert" role="alert">{!! session()->get('success') !!}</div>
@@ -47,7 +47,7 @@
                             <td>{{$customer->registered_by == 0 ? 'Self' : $customer->getRegisteredBy->first_name.' '.$customer->getRegisteredBy->surname }} </td>
                             <td>{{date('d M, Y', strtotime($customer->created_at))}}</td>
                             <td>
-                                <a href="{{route('customer-profile', $customer->slug)}}" class="badge badge-classic badge-primary text-uppercase">View</a>
+                                <a href="{{route('donzy.customer-profile', $customer->slug)}}" class="badge badge-classic badge-primary text-uppercase">View</a>
                             </td>
                         </tr>
                     @endforeach

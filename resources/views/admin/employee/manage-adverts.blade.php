@@ -60,7 +60,7 @@
         <div class="widget-content widget-content-area br-6">
             <h3>Manage Adverts</h3>
             <p>This list is made up of all adverts you've placed on this platform on behalf of our esteemed customers.</p>
-            <a class="btn btn-primary btn-rounded mb-2 " href="{{route('post-advert')}}">Post New Advert</a>
+            <a class="btn btn-primary btn-rounded mb-2 " href="{{route('donzy.post-advert')}}">Post New Advert</a>
             <div class="table-responsive mb-4 mt-4">
                 @if (session()->has('success'))
                     <div class="alert-success alert" role="alert">{!! session()->get('success') !!}</div>
@@ -106,7 +106,7 @@
                             </td>
                             <td>{{!is_null($advert->end_date) ? date('d/m/Y', strtotime($advert->end_date)) : '-'}}</td>
                             <td>
-                                <a href="{{route('view-advert', $advert->slug)}}" class="badge badge-classic badge-primary text-uppercase">View</a>
+                                <a href="{{route('donzy.view-advert', $advert->slug)}}" class="badge badge-classic badge-primary text-uppercase">View</a>
                             </td>
                         </tr>
                     @endforeach

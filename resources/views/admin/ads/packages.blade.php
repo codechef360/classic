@@ -15,10 +15,10 @@ All Packages
 @section('main-content')
 <div class="col-xl-3 col-lg-3 col-sm-3  layout-spacing">
     <div class="widget-content widget-content-area br-6">
-        <form class="needs-validation" novalidate action="{{route('packages')}}" method="post" autocomplete="off">
+        <form class="needs-validation" novalidate action="{{route('donzy.packages')}}" method="post" autocomplete="off">
             @csrf
             <div class="form-row">
-                <div class="col-md-12 mb-4">
+                <div class="col-md-12 mb-1">
                     <label for="validationCustom03">Package Name</label>
                     <input type="text" class="form-control" value="{{old('package_name')}}" name="package_name"  placeholder="Package Name" required>
                     <div class="invalid-feedback">
@@ -28,7 +28,7 @@ All Packages
                         <i class="text-danger mt-2">{{$message}}</i>
                     @enderror
                 </div>
-                <div class="col-md-12 mb-4">
+                <div class="col-md-12 mb-1">
                     <label for="validationCustom03">Duration <small>(in days)</small></label>
                     <input type="number" class="form-control" value="{{old('duration')}}" name="duration"  placeholder="Duration" required>
                     <div class="invalid-feedback">
@@ -38,7 +38,32 @@ All Packages
                         <i class="text-danger mt-2">{{$message}}</i>
                     @enderror
                 </div>
-                <div class="col-md-12 mb-4">
+                <div class="col-md-12 mb-1">
+                    <label for="validationCustom03">Category</label>
+                    <select name="package_category" id="package_category" class="form-control" required>
+                        <option selected disabled>--Select category--</option>
+                        <option value="1">In Cars</option>
+                        <option value="2">In Property</option>
+                        <option value="3">In Others</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select category.
+                    </div>
+                    @error('package_category')
+                        <i class="text-danger mt-2">{{$message}}</i>
+                    @enderror
+                </div>
+                <div class="col-md-12 mb-1">
+                    <label for="validationCustom03">Promotion Power <abbr title="Maximum # of ads that can be posted"></abbr> </label>
+                    <input type="number"  class="form-control" value="{{old('promotion_power')}}" name="promotion_power"  placeholder="Promotion Power (ex: 2)" required>
+                    <div class="invalid-feedback">
+                        Please enter promotion power
+                    </div>
+                    @error('promotion_power')
+                        <i class="text-danger mt-2">{{$message}}</i>
+                    @enderror
+                </div>
+                <div class="col-md-12 mb-1">
                     <label for="validationCustom03">Amount</label>
                     <input type="number" step="0.01" class="form-control" value="{{old('amount')}}" name="amount"  placeholder="Amount" required>
                     <div class="invalid-feedback">
@@ -47,6 +72,47 @@ All Packages
                     @error('amount')
                         <i class="text-danger mt-2">{{$message}}</i>
                     @enderror
+                </div>
+                 <div class="col-md-12 mb-1">
+                    <label for="validationCustom03">Auto Renew <small>(in hours)</small></label>
+                    <select name="auto_renew" id="auto_renew" class="form-control" required>
+                        <option selected disabled>--Select Renewal--</option>
+                        <option value="0">0 hours</option>
+                        <option value="12">12 hours</option>
+                        <option value="6">6 hours</option>
+                        <option value="3">3 hours</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select auto renewal period
+                    </div>
+                    @error('auto_renew')
+                        <i class="text-danger mt-2">{{$message}}</i>
+                    @enderror
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p><strong>Other Features</strong></p>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-1">
+                    <div class="form-check">
+                        <input class="form-check-input" name="sms_notification" type="checkbox" value="1" >
+                        <label class="form-check-label" for="flexCheckDefault">
+                            SMS Notification
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" name="email_notification">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Email Notification
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" name="website_link">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Website Link
+                        </label>
+                    </div>
                 </div>
                 <div class="col-md-12 d-flex justify-content-center">
                     <div class="btn-group ">
@@ -70,6 +136,7 @@ All Packages
                         <th>#</th>
                         <th>Package Name</th>
                         <th>Amount</th>
+                        <th>Category</th>
                         <th>Duration</th>
                         <th>Action</th>
                     </tr>
@@ -83,9 +150,19 @@ All Packages
                             <td>{{$serial++}}</td>
                             <td>{{$item->package_name ?? ''}}</td>
                             <td>{{number_format($item->amount,2)}}</td>
+                            <td>
+                                @if ($item->adpack_category == 1)
+                                    <label class="label label-info">In Cars</label>
+                                @elseif($item->adpack_category == 2)
+                                    <label class="label label-info">In Property</label>
+                                @else
+                                    <label class="label label-info">In Others</label>
+
+                                @endif
+                            </td>
                             <td>{{$item->duration ?? 0}} <small> days</small></td>
                             <td>
-                                <a href="{{route('package-edit', $item->id)}}" class="badge badge-classic badge-warning text-uppercase">Edit</a>
+                                <a href="{{route('donzy.package-edit', $item->id)}}" class="badge badge-classic badge-warning text-uppercase">Edit</a>
                             </td>
                         </tr>
                     @endforeach
@@ -95,6 +172,7 @@ All Packages
                         <th>#</th>
                         <th>Package Name</th>
                         <th>Amount</th>
+                        <th>Category</th>
                         <th>Duration</th>
                         <th>Action</th>
                     </tr>

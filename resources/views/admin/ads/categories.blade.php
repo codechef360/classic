@@ -15,7 +15,7 @@ All Categories
 @section('main-content')
 <div class="col-xl-3 col-lg-3 col-sm-3  layout-spacing">
     <div class="widget-content widget-content-area br-6">
-        <form class="needs-validation" enctype="multipart/form-data" novalidate action="{{route('categories')}}" method="post" autocomplete="off">
+        <form class="needs-validation" enctype="multipart/form-data" novalidate action="{{route('donzy.categories')}}" method="post" autocomplete="off">
             @csrf
             <div class="form-row">
                 <div class="col-md-12 mb-4">

@@ -3,6 +3,7 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/app.js"></script>
+<script src="/assets/js/toastify.min.js"></script>
 <script>
     $(document).ready(function() {
         App.init();

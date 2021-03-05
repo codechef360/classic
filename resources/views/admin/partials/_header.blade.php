@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/toastify.min.css" rel="stylesheet" type="text/css" />
     <style>
         .layout-px-spacing {
             min-height: calc(100vh - 166px)!important;

@@ -69,9 +69,9 @@
                                             <label class="form-label">Product Category</label>
                                             <select class="form-control custom-select" value="{{old('category')}}" name="category">
                                                 <option selected disabled>--Select Category--</option>
-                                                <option value="1">property</option>
-                                                <option value="2">electronics</option>
-                                                <option value="3">automobiles</option>
+                                                @foreach ($categories as $cat)
+                                                    <option value="{{$cat->id}}">{{$cat->category_name ?? ''}}</option>
+                                                @endforeach
                                             </select>
                                              @error('category')
                                                 <i class="text-danger">{{$message}}</i>
@@ -97,9 +97,9 @@
                                             <label class="form-label">Location</label>
                                             <select class="form-control custom-select" value="{{old('location')}}" name="location" id="location">
                                                 <option selected disabled>--Select location--</option>
-                                                <option value="1">property</option>
-                                                <option value="2">electronics</option>
-                                                <option value="3">automobiles</option>
+                                                @foreach ($locations as $locate)
+                                                    <option value="{{$locate->id}}">{{$locate->location_name ?? ''}}</option>
+                                                @endforeach
                                             </select>
                                              @error('location')
                                                 <i class="text-danger">{{$message}}</i>
@@ -109,12 +109,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-label">Area</label>
-                                            <select class="form-control custom-select" name="area" value="{{old('area')}}">
-                                                <option selected disabled>--Select area--</option>
-                                                <option value="1">property</option>
-                                                <option value="2">electronics</option>
-                                                <option value="3">automobiles</option>
-                                            </select>
+                                            <div id="area-wrapper"></div>
                                              @error('area')
                                                 <i class="text-danger">{{$message}}</i>
                                             @enderror
@@ -162,7 +157,7 @@
                             </div>
                             <div class="adpost-card">
                                 <div class="adpost-title">
-                                    <h3>Plan Information</h3>
+                                    <h3>Package Information</h3>
                                 </div>
                                 <ul class="adpost-plan-list">
                                     <li>
@@ -262,4 +257,21 @@
                 </div>
             </div>
         </section>
+@endsection
+@section('extra-scripts')
+<script src="/js/custom/select2.min.js"></script>
+<script src="/js/custom/axios.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('.js-example-basic-single').select2();
+        $(document).on('change', '#location', function(e){
+            e.preventDefault();
+            axios.post('/get-location', {location:$(this).val()})
+            .then(response=>{
+                $('#area-wrapper').html(response.data)
+                   // $(".js-example-basic-single").select2();
+            });
+        });
+    });
+</script>
 @endsection

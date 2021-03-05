@@ -19,7 +19,7 @@
         <div class="widget-content widget-content-area br-6">
             <h3> Add New Customer</h3>
             <p>We assume you're doing this registeration on behalf of a customer/company. Kindly note that the login credentials to the customer's account will be <i>mailed</i> to the registered email used during this registration. Do well to inform the customer to check his/her email account (inbox/spam folder) for the login credentials</p>
-            <a class="btn btn-primary btn-rounded mb-2 " href="{{route('manage-my-customers')}}">My Customers</a>
+            <a class="btn btn-primary btn-rounded mb-2 " href="{{route('donzy.manage-my-customers')}}">My Customers</a>
             @if (session()->has('success'))
                 <div class="alert-success alert" role="alert">{!! session()->get('success') !!}</div>
             @endif
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="widget-content widget-content-area">
-                            <form enctype="multipart/form-data" action="{{route('add-new-customer')}}" method="post" autocomplete="off">
+                            <form enctype="multipart/form-data" action="{{route('donzy.add-new-customer')}}" method="post" autocomplete="off">
                                 @csrf
                                 <div class="form-row mb-1">
                                     <div class="form-group col-md-4">

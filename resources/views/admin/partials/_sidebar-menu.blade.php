@@ -43,22 +43,22 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="submenu" data-parent="#accordionExample">
                     <li>
-                        <a href="{{route('manage-adverts')}}"> Manage Adverts </a>
+                        <a href="{{route('donzy.manage-adverts')}}"> Manage Adverts </a>
                     </li>
                     <li>
-                        <a href="{{route('packages')}}"> Packages </a>
+                        <a href="{{route('donzy.packages')}}"> Packages </a>
                     </li>
                     <li>
-                        <a href="{{route('categories')}}"> Categories </a>
+                        <a href="{{route('donzy.categories')}}"> Categories </a>
                     </li>
                     <li>
-                        <a href="{{route('sub-categories')}}"> Sub-categories </a>
+                        <a href="{{route('donzy.sub-categories')}}"> Sub-categories </a>
                     </li>
                     <li>
-                        <a href="{{route('locations')}}"> Locations </a>
+                        <a href="{{route('donzy.locations')}}"> Locations </a>
                     </li>
                     <li>
-                        <a href="{{route('areas')}}"> Areas </a>
+                        <a href="{{route('donzy.areas')}}"> Areas </a>
                     </li>
                 </ul>
             </li>
@@ -75,16 +75,16 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="submenu2" data-parent="#accordionExample">
                     <li>
-                        <a href="{{route('all-employees')}}"> Employees</a>
+                        <a href="{{route('donzy.all-employees')}}"> Employees</a>
                     </li>
                     <li>
-                        <a href="{{route('manage-customers')}}"> Customers</a>
+                        <a href="{{route('donzy.manage-customers')}}"> Customers</a>
                     </li>
                     <li>
-                        <a href="{{route('roles')}}"> Roles </a>
+                        <a href="{{route('donzy.roles')}}"> Roles </a>
                     </li>
                     <li>
-                        <a href="{{route('permissions')}}"> Permissions </a>
+                        <a href="{{route('donzy.permissions')}}"> Permissions </a>
                     </li>
                 </ul>
             </li>
@@ -100,13 +100,13 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="submenu3" data-parent="#accordionExample">
                     <li>
-                        <a href="{{route('manage-my-customers')}}"> Manage Customers</a>
+                        <a href="{{route('donzy.manage-my-customers')}}"> Manage Customers</a>
                     </li>
                     <li>
-                        <a href="{{route('manage-my-adverts')}}"> Manage Adverts</a>
+                        <a href="{{route('donzy.manage-my-adverts')}}"> Manage Adverts</a>
                     </li>
                     <li>
-                        <a href="{{route('manage-my-adverts')}}"> Transactions</a>
+                        <a href="{{route('donzy.manage-my-adverts')}}"> Transactions</a>
                     </li>
                 </ul>
             </li>

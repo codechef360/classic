@@ -61,7 +61,7 @@
                                 </td>
                                 <td>{{!is_null($advert->end_date) ? date('d/m/Y', strtotime($advert->end_date)) : '-'}}</td>
                                 <td>
-                                    <a href="{{route('view-advert', $advert->slug)}}" class="badge badge-classic badge-primary text-uppercase">View</a>
+                                    <a href="{{route('donzy.view-advert', $advert->slug)}}" class="badge badge-classic badge-primary text-uppercase">View</a>
                                 </td>
                             </tr>
                         @endforeach

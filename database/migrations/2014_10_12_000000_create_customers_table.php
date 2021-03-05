@@ -41,6 +41,7 @@ class CreateCustomersTable extends Migration
             $table->string('verification_document')->nullable();
             $table->rememberToken();
             $table->unsignedBigInteger('registered_by')->nullable()->default(0)->comment('0=self');
+            $table->unsignedBigInteger('package_plan')->default(1)->comment('1=Free package plan');
             $table->timestamps();
         });
     }

@@ -45,7 +45,7 @@ class AdsManagementController extends Controller
         $category->slug = Str::slug($request->category_name.'_'.substr(sha1(time()),32,40));
         $category->save();
         session()->flash("success", "<strong>Success!</strong> New category added.");
-        return redirect()->route('categories');
+        return redirect()->route('donzy.categories');
     }
     public function subCategories(){
         $categories = Category::orderBy('category_name', 'ASC')->get();
@@ -62,7 +62,7 @@ class AdsManagementController extends Controller
         $category->sub_category_name = $request->sub_category_name;
         $category->save();
         session()->flash("success", "<strong>Success!</strong> New sub-category added.");
-        return redirect()->route('sub-categories');
+        return redirect()->route('donzy.sub-categories');
     }
 
     public function showPackages(){
@@ -74,12 +74,21 @@ class AdsManagementController extends Controller
         $request->validate([
            'package_name'=>'required',
            'duration'=>'required',
-           'amount'=>'required'
+           'amount'=>'required',
+           'package_category'=>'required',
+           'promotion_power'=>'required',
+           'auto_renew'=>'required'
         ]);
         $package = new Package;
         $package->package_name = $request->package_name;
         $package->duration = $request->duration;
         $package->amount = $request->amount;
+        $package->adpack_category = $request->package_category;
+        $package->adpack = $request->promotion_power;
+        $package->auto_renew = $request->auto_renew;
+        $package->sms_notification = $request->sms_notification ?? 0;
+        $package->email_notification = $request->email_notification ?? 0;
+        $package->website_link = $request->website_link ?? 0;
         $package->save();
         session()->flash("success", "<strong>Success!</strong> New package registered.");
         return back();
@@ -93,15 +102,24 @@ class AdsManagementController extends Controller
         $request->validate([
            'package_name'=>'required',
            'duration'=>'required',
-           'amount'=>'required'
+           'amount'=>'required',
+           'package_category'=>'required',
+           'promotion_power'=>'required',
+           'auto_renew'=>'required'
         ]);
         $package = Package::find($request->package);
         $package->package_name = $request->package_name;
         $package->duration = $request->duration;
         $package->amount = $request->amount;
+        $package->adpack_category = $request->package_category;
+        $package->adpack = $request->promotion_power;
+        $package->auto_renew = $request->auto_renew;
+        $package->sms_notification = $request->sms_notification ?? 0;
+        $package->email_notification = $request->email_notification ?? 0;
+        $package->website_link = $request->website_link ?? 0;
         $package->save();
-        session()->flash("success", "<strong>Success!</strong> New package registered.");
-        return redirect()->route('packages');
+        session()->flash("success", "<strong>Success!</strong> Changes saved.");
+        return redirect()->route('donzy.packages');
     }
 
     public function manageAdverts(){

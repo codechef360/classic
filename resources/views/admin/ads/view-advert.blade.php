@@ -73,7 +73,7 @@
 
                                     <div class="inv-action">
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{route('manage-adverts')}}" class="btn btn-primary">Customer</a>
+                                            <a href="{{route('donzy.manage-adverts')}}" class="btn btn-primary">Customer</a>
                                             <button type="button" class="btn btn-warning" data-target="#endAdvertModal" data-toggle="modal">Update Status</button>
                                             <a href="{{url()->previous()}}" class="btn btn-secondary">Go Back</a>
                                         </div>
@@ -203,7 +203,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 </button>
             </div>
-            <form action="{{route('update-advert-status')}}" method="post">
+            <form action="{{route('donzy.update-advert-status')}}" method="post">
             <div class="modal-body">
                 <p>Update advert status</p>
                 <div class="form-group">

@@ -76,9 +76,9 @@ Route::get('/marketplace', [App\Http\Controllers\MarketplaceController::class, '
 #Admin routes
 #Admin routes
 
-Route::group(['prefix'=>'admin','as'=>'admin.'], function(){
-    Route::get('/admin', [App\Http\Controllers\Admin\Auth\LoginController::class, 'showLoginForm'])->name('admin-login');
-    Route::post('/admin', [App\Http\Controllers\Admin\Auth\LoginController::class, 'login']);
+Route::group(['prefix'=>'donzy','as'=>'donzy.'], function(){
+    Route::get('/', [App\Http\Controllers\Admin\Auth\LoginController::class, 'showLoginForm'])->name('admin-login');
+    Route::post('/', [App\Http\Controllers\Admin\Auth\LoginController::class, 'login']);
 
 
     Route::get('/all-employees', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('all-employees');
@@ -131,7 +131,7 @@ Route::group(['prefix'=>'admin','as'=>'admin.'], function(){
     Route::get('/manage/my-customers', [App\Http\Controllers\Admin\EmployeeController::class, 'manageMyCustomers'] )->name('manage-my-customers');
     Route::get('/post-advert', [App\Http\Controllers\Admin\EmployeeController::class, 'postAdvert'])->name('post-advert');
     //Route::post('/post-advert', [App\Http\Controllers\Admin\EmployeeController::class, 'storeAdvert']);
-    Route::post('/proceed-to-pay', [App\Http\Controllers\Admin\EmployeeController::class, 'proceedToPay'])->name('proceed-to-pay');
+    Route::post('/proceed-to-pay', [App\Http\Controllers\Admin\EmployeeController::class, 'storeAdvert'])->name('proceed-to-pay');
 
     Route::post('/update-advert-status', [App\Http\Controllers\Admin\EmployeeController::class, 'updateAdvertStatus'])->name('update-advert-status');
     Route::get('/add-new-customer', [App\Http\Controllers\Admin\EmployeeController::class, 'showAddNewCustomerForm'])->name('add-new-customer');

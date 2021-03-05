@@ -62,7 +62,7 @@ class LoginController extends Controller
 				$log->user_id = Auth::user()->id;
 				$log->save(); */
 				session()->flash("update_profile", "<strong>Notice: </strong> You're adviced to complete your profile");
-				return redirect()->route('manage-adverts');
+				return redirect()->route('donzy.manage-adverts');
 			}else{
 				 session()->flash("error", "<strong>Error! </strong> Wrong or invalid login credentials. Try again.");
 				 return back();

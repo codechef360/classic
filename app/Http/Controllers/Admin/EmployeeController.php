@@ -108,7 +108,9 @@ class EmployeeController extends Controller
             }
          }
        session()->flash("success", "<strong>Success!</strong> Your ads have been placed.");
-       return redirect()->route('manage-my-adverts');
+      // return redirect()->route('donzy.manage-my-adverts');
+      return ['redirect' => route('donzy.manage-my-adverts')];
+
 
    }
 

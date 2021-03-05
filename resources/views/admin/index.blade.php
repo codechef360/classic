@@ -16,7 +16,7 @@
 <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
     <div class="widget-content widget-content-area br-6">
         <h3>All Employees</h3>
-        <a href="{{route('add-new-employee')}}" class="btn btn-primary btn-sm float-right mb-2 mt-2"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        <a href="{{route('donzy.add-new-employee')}}" class="btn btn-primary btn-sm float-right mb-2 mt-2"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             Add New Employee</a>
         <div class="table-responsive mb-4 mt-4">
             @if (session()->has('success'))
@@ -45,7 +45,7 @@
                             <td>
                                 <div class="d-flex">
                                     <div class="usr-img-frame mr-2 rounded-circle">
-                                        <img alt="avatar" class="img-fluid rounded-circle" src="assets/img/90x90.jpg">
+                                        <img alt="avatar" class="img-fluid rounded-circle" src="/assets/img/90x90.jpg">
                                     </div>
                                     <p class="align-self-center mb-0 admin-name"> {{$user->first_name ?? ''}} {{$user->surname ?? ''}}</p>
                                 </div>
@@ -60,7 +60,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{route('view-employee-profile', $user->url)}}" class="badge badge-classic badge-primary text-uppercase">View Profile</a>
+                                <a href="{{route('donzy.view-employee-profile', $user->url)}}" class="badge badge-classic badge-primary text-uppercase">View Profile</a>
                             </td>
                         </tr>
                     @endforeach

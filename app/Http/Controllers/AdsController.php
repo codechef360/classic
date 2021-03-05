@@ -28,10 +28,10 @@ class AdsController extends Controller
 
 
    public function showPostAdsForm(){
-    //$categories = Category::orderBy('category_name', 'ASC')->get();
-    //$locations = Location::orderBy('location_name', 'ASC')->get();
-    //$packages = Package::orderBy('amount', 'ASC')->get();
-       return view('advert.post-your-ad');
+        $categories = Category::orderBy('category_name', 'ASC')->get();
+        $locations = Location::orderBy('location_name', 'ASC')->get();
+        $packages = Package::orderBy('amount', 'ASC')->get();
+       return view('advert.post-your-ad',['categories'=>$categories,'locations'=>$locations,'packages'=>$packages]);
    }
 /*
    public function postAdsConfirmation(Request $request){

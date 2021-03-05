@@ -24,6 +24,7 @@ class CreateAdsTable extends Migration
             $table->unsignedInteger('package_id');
             $table->string('title');
             $table->text('description');
+            $table->text('ad_tag')->nullable();
             $table->double('price')->default(0)->comment('price of item');
             $table->tinyInteger('negotiable')->default(0)->comment('0=no, 1=yes');
             $table->string('featured_image');

@@ -25,7 +25,7 @@
                         @if (session()->has('error'))
                             <div class="alert alert-warning">{!! session()->get('error') !!}</div>
                         @endif
-                        <form class="text-left" action="{{route('admin-login')}}" method="post">
+                        <form class="text-left" action="{{route('donzy.admin-login')}}" method="post">
                             @csrf
                             <div class="form">
 
