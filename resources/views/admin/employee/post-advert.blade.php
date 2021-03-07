@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        <form enctype="multipart/form-data" action="{{route('donzy.proceed-to-pay')}}" method="post" id="postAdvertForm">
+                        <form  novalidate enctype="multipart/form-data" action="{{route('donzy.proceed-to-pay')}}" method="post" id="postAdvertForm">
                             @csrf
                             <div class="form-row mb-1">
                                 <div class="form-group col-md-6">
@@ -46,6 +46,9 @@
                                     @error('customer')
                                         <i class="text-danger mt-2">{{$message}}</i>
                                     @enderror
+                                    <div class="invalid-feedback">
+                                        Select customer
+                                    </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputPassword4">Title</label>
@@ -164,7 +167,7 @@
                                     <input type="hidden" name="metadata[]" id="metadata">
                                     <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
                                     <input type="hidden" name="amount" id="package_amount">
-                                    <button type="button" class="btn btn-primary mt-3" onclick="payWithPaystack()" >Submit</button>
+                                    <button type="button" class="btn btn-primary mt-3" id="proceedToPay" >Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -213,6 +216,15 @@
             });
 
 
+            $(document).on('click', '#proceedToPay', function(e){
+                if($('#package_amount').val() > 0){
+                    payWithPaystack();
+                }else{
+                    postForm();
+                }
+            });
+
+
         });
         function payWithPaystack(){
         var handler = PaystackPop.setup({
@@ -232,38 +244,7 @@
         },
         callback: function(response){
            // $('#transaction').val(response.trans);
-             axios.post('/donzy/proceed-to-pay',new FormData(postAdvertForm))
-                .then(response=>{
-                    Toastify({
-                        text: "Success! Advert posted.",
-                        duration: 3000,
-                        newWindow: true,
-                        close: true,
-                        gravity: "top",
-                        position: 'right',
-                        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-                        stopOnFocus: true,
-                        onClick: function(){}
-                    }).showToast();
-                     //window.location.href = "{{config('app.url')}}/donzy/manage/my-adverts";
-                     window.location = response.data.redirect;
-                })
-                .catch(error=>{
-                    $.each(error.response.data.errors, function(key, value){
-                        Toastify({
-                            text: value,
-                            duration: 3000,
-                            newWindow: true,
-                            close: true,
-                            gravity: "top",
-                            position: 'right',
-                            backgroundColor: "linear-gradient(to right, #FF0000, #FE0000)",
-                            stopOnFocus: true,
-                            onClick: function(){}
-                        }).showToast();
-
-                    });
-                });
+             postForm();
 
         },
         onClose: function(){
@@ -271,6 +252,41 @@
         }
     });
     handler.openIframe();
+}
+
+function postForm(){
+    axios.post('/donzy/proceed-to-pay',new FormData(postAdvertForm))
+        .then(response=>{
+        Toastify({
+            text: "Success! Advert posted.",
+            duration: 3000,
+            newWindow: true,
+            close: true,
+            gravity: "top",
+            position: 'right',
+            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            stopOnFocus: true,
+            onClick: function(){}
+        }).showToast();
+            //window.location.href = "{{config('app.url')}}/donzy/manage/my-adverts";
+            window.location = response.data.redirect;
+    })
+    .catch(error=>{
+        $.each(error.response.data.errors, function(key, value){
+            Toastify({
+                text: value,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: 'right',
+                backgroundColor: "linear-gradient(to right, #FF0000, #FE0000)",
+                stopOnFocus: true,
+                onClick: function(){}
+            }).showToast();
+
+        });
+    });
 }
     </script>
 @endsection
