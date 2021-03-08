@@ -28,22 +28,19 @@
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-3">
                         <div class="footer-content">
-                            <h3>Quick Links</h3>
+                            <h3>Business</h3>
                             <ul class="footer-widget">
                                 <li>
-                                    <a href="#">Store Location</a>
+                                    <a href="{{route('terms')}}">Terms</a>
                                 </li>
                                 <li>
-                                    <a href="#">Orders Tracking</a>
+                                    <a href="{{route('policies')}}">Policy</a>
                                 </li>
                                 <li>
-                                    <a href="#">My Account</a>
+                                    <a href="{{route('tips')}}">Tips</a>
                                 </li>
                                 <li>
-                                    <a href="#">Size Guide</a>
-                                </li>
-                                <li>
-                                    <a href="#">Faq</a>
+                                    <a href="{{route('faqs')}}">FAQs</a>
                                 </li>
                             </ul>
                         </div>

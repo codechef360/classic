@@ -108,4 +108,17 @@ class HomeController extends Controller
             return back();
         }
     }
+
+    public function faqs(){
+        return view('misc.faqs');
+    }
+    public function tips(){
+        return view('misc.tips');
+    }
+    public function terms(){
+        return view('misc.terms');
+    }
+    public function policies(){
+        return view('misc.policies');
+    }
 }

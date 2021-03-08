@@ -67,7 +67,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-label">Product Category</label>
-                                            <select class="form-control custom-select" value="{{old('category')}}" name="category">
+                                            <select class="form-control custom-select" id="category" value="{{old('category')}}" name="category">
                                                 <option selected disabled>--Select Category--</option>
                                                 @foreach ($categories as $cat)
                                                     <option value="{{$cat->id}}">{{$cat->category_name ?? ''}}</option>
@@ -81,12 +81,9 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-label">Product Subcategory</label>
-                                            <select name="subcategory" value="{{old('subcategory')}}" class="form-control custom-select">
-                                                <option selected disabled>--Select Subcategory--</option>
-                                                <option value="1">property</option>
-                                                <option value="2">electronics</option>
-                                                <option value="3">automobiles</option>
-                                            </select>
+                                            <div id="subcategory-wrapper">
+
+                                            </div>
                                              @error('subcategory')
                                                 <i class="text-danger">{{$message}}</i>
                                             @enderror
@@ -155,7 +152,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="adpost-card">
+                            <!-- <div class="adpost-card">
                                 <div class="adpost-title">
                                     <h3>Package Information</h3>
                                 </div>
@@ -206,9 +203,9 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                             <div class="adpost-card pb-2">
-                                <div class="adpost-agree">
+                                <!-- <div class="adpost-agree">
                                     <div class="form-group">
                                         <input type="checkbox" class="form-check" name="notification">
                                     </div>
@@ -219,7 +216,7 @@
                                         <a href="#">Privacy Policy</a>
                                         and acknowledge that you are the rightful owner of this item and using Trade to find a genuine buyer.
                                     </p>
-                                </div>
+                                </div> -->
                                 <div class="form-group text-right">
                                     <button class="btn btn-inline">
                                         <i class="fas fa-check-circle"></i>
@@ -233,23 +230,19 @@
                         <div class="account-card alert fade show">
                             <div class="account-title">
                                 <h3>Safety Tips</h3>
-                                <button data-dismiss="alert">close</button>
                             </div>
                             <ul class="account-card-text">
                                 <li>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit debitis odio perferendis placeat at aperiam.</p>
+                                    <p>Do not pay in advance even for the delivery</p>
                                 </li>
                                 <li>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit debitis odio perferendis placeat at aperiam.</p>
+                                    <p>Try to meet at a safe, public location.</p>
                                 </li>
                                 <li>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit debitis odio perferendis placeat at aperiam.</p>
+                                    <p>Check the item BEFORE you buy it</p>
                                 </li>
                                 <li>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit debitis odio perferendis placeat at aperiam.</p>
-                                </li>
-                                <li>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit debitis odio perferendis placeat at aperiam.</p>
+                                    <p>Pay only after collecting the item</p>
                                 </li>
                             </ul>
                         </div>
@@ -269,6 +262,14 @@
             axios.post('/get-location', {location:$(this).val()})
             .then(response=>{
                 $('#area-wrapper').html(response.data)
+                   // $(".js-example-basic-single").select2();
+            });
+        });
+        $(document).on('change', '#category', function(e){
+            e.preventDefault();
+            axios.post('/get-subcategories', {category:$(this).val()})
+            .then(response=>{
+                $('#subcategory-wrapper').html(response.data)
                    // $(".js-example-basic-single").select2();
             });
         });

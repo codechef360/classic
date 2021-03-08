@@ -30,6 +30,10 @@ Route::get('/',[App\Http\Controllers\HomeController::class,'index'])->name('home
 Route::get('/view-advert/{slug}', [App\Http\Controllers\HomeController::class, 'viewAdvert'])->name('view-advert');
 Route::get('/contact-vendor/{slug}', [App\Http\Controllers\HomeController::class, 'contactVendor'])->name('contact-vendor');
 Route::get('/advert/by/category/{slug}', [App\Http\Controllers\HomeController::class, 'getAdvertByCategory'])->name('get-advert-by-category');
+Route::get('/faqs', [App\Http\Controllers\HomeController::class, 'faqs'])->name('faqs');
+Route::get('/tips', [App\Http\Controllers\HomeController::class, 'tips'])->name('tips');
+Route::get('/terms', [App\Http\Controllers\HomeController::class, 'terms'])->name('terms');
+Route::get('/policies', [App\Http\Controllers\HomeController::class, 'policies'])->name('policies');
 
 Auth::routes();
 Route::get('/logout',  [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
@@ -64,6 +68,7 @@ Route::get('/message/read/{slug}', [App\Http\Controllers\CustomerController::cla
 Route::post('/message/reply', [App\Http\Controllers\CustomerController::class, 'replyMessage'])->name('reply-message');
 Route::get('/notifications', [App\Http\Controllers\CustomerController::class, 'notifications'])->name('notifications');
 Route::post('/get-location', [App\Http\Controllers\CustomerController::class, 'getLocations']);
+Route::post('/get-subcategories', [App\Http\Controllers\CustomerController::class, 'getSubcategories']);
 
 
 

@@ -13,6 +13,7 @@ use App\Models\ReportAdvert;
 use App\Models\Wishlist;
 use App\Models\Location;
 use App\Models\Area;
+use App\Models\SubCategory;
 use Auth;
 use Image;
 
@@ -165,6 +166,10 @@ class CustomerController extends Controller
     public function getLocations(Request $request){
         $areas = Area::where('location_id', $request->location)->orderBy('area_name', 'ASC')->get();
     return view('partials._area-select',['areas'=>$areas]);
+   }
+    public function getSubcategories(Request $request){
+        $subs = SubCategory::where('category_id', $request->category)->orderBy('sub_category_name', 'ASC')->get();
+    return view('partials._subcategory-select',['subs'=>$subs]);
    }
 
 }

@@ -39,7 +39,7 @@
                     </div>
                     <form class="header-search">
                         <div class="header-main-search">
-                            <button type="submit" class="header-search-btn">
+                            <button type="button" class="header-search-btn">
                                 <i class="fas fa-search"></i>
                             </button>
                             <input type="text" class="form-control" placeholder="Search, Whatever you needs...">
@@ -124,13 +124,13 @@
                                         <a class="navbar-link" href="{{route('post-your-ad')}}">Post Your Ad</a>
                                     </li>
                                     <li class="navbar-item">
-                                        <a class="navbar-link" href="contact.html">FAQs</a>
+                                        <a class="navbar-link" href="{{route('faqs')}}">FAQs</a>
                                     </li>
                                     <li class="navbar-item">
                                         <a class="navbar-link" href="{{route('register')}}">Register/Login</a>
                                     </li>
                                     <li class="navbar-item">
-                                        <a class="navbar-link" href="contact.html">Contact us</a>
+                                        <a class="navbar-link" href="{{route('tips')}}">Tips</a>
                                     </li>
                                 @endif
 
@@ -178,10 +178,7 @@
                     </div>
                     <div class="sidebar-footer">
                         <p>All Rights Reserved By
-                            <a href="#">Classicads</a>
-                        </p>
-                        <p>Developed By
-                            <a href="#">Jo</a>
+                            <a href="{{route('home')}}" target="_blank">{{config('app.name')}}</a>
                         </p>
                     </div>
                 </div>

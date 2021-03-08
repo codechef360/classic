@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
     use HasFactory;
+    protected $fillable = ['location_id', 'area_name'];
+
+
+    public function getLocation(){
+        return $this->belongsTo(Location::class, 'location_id');
+    }
 }
