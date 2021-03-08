@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="product-title">
                                     <h5>
-                                        <a href="javascript:void(0);">{{$item->data}}</a>
+                                        <a href="javascript:void(0);">Static</a>
                                     </h5>
                                     <ul class="product-location">
                                         <li>
@@ -61,35 +61,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#">
-                                <i class="fas fa-long-arrow-alt-left"></i>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link active" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">...</li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">67</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">
-                                <i class="fas fa-long-arrow-alt-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+
         </div>
     </section>
 @endsection

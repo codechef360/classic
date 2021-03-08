@@ -29,7 +29,7 @@
                                 <div class="product-head">
                                     <div class="dash-avatar">
                                             <a href="#">
-                                                <img src="/images/avatar/01.jpg" alt="avatar">
+                                                <img src="/attachments/avatar/{{$message->getFrom->avatar ?? 'avatar.png'}}" alt="avatar">
                                             </a>
                                         </div>
                                 </div>
@@ -72,7 +72,7 @@
                                                 <div class="review-author">
                                                     <div class="review-avatar">
                                                         <a href="#">
-                                                            <img src="/images/avatar/02.jpg" alt="review">
+                                                            <img src="/attachments/avatar/{{$reply->getRepliedBy->avatar ?? 'avatar.png'}}" alt="review">
                                                         </a>
                                                     </div>
                                                     <div class="review-meta">
@@ -94,7 +94,7 @@
                                                 <div class="review-author">
                                                     <div class="review-avatar">
                                                         <a href="#">
-                                                            <img src="/images/avatar/04.jpg" alt="review">
+                                                            <img src="/attachments/avatar/{{Auth::user()->avatar ?? 'avatar.png'}}" alt="review">
                                                         </a>
                                                     </div>
                                                     <div class="review-meta">
